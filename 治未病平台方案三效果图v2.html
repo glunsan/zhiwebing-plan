@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>治未病 · 方案三 · 完整生态版</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1208;
+  --earth: #8B6914;
+  --moss: #4a6741;
+  --moss-deep: #2d4a28;
+  --paper: #faf7f2;
+  --warm-white: #fffdf9;
+  --gold: #c9972a;
+  --gold-light: #e8b84b;
+  --sage: #7a9e72;
+  --cream: #e8dfc8;
+  --muted: #8a7860;
+  --ivory: #fffcf5;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #2c2416;
+  font-family: 'Noto Sans SC', sans-serif;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 40px 20px 60px;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(201,151,42,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(74,103,65,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.page-eyebrow { color: rgba(255,255,255,0.35); font-size: 11px; letter-spacing: 5px; margin-bottom: 8px; }
+.page-title { font-family: 'Noto Serif SC', serif; color: var(--gold-light); font-size: 24px; font-weight: 700; letter-spacing: 2px; margin-bottom: 4px; }
+.page-subtitle { color: rgba(255,255,255,0.35); font-size: 12px; letter-spacing: 2px; margin-bottom: 12px; text-align: center; }
+.badge { display: inline-block; background: rgba(201,151,42,0.15); border: 1px solid rgba(201,151,42,0.3); color: var(--gold); font-size: 10px; padding: 4px 14px; border-radius: 12px; letter-spacing: 2px; margin-bottom: 48px; }
+.screens-row { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; max-width: 1300px; }
+.screen-col { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.screen-label { color: rgba(255,255,255,0.4); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
+.screen-tag { font-size: 9px; padding: 2px 9px; border-radius: 8px; letter-spacing: 2px; background: rgba(201,151,42,0.15); border: 1px solid rgba(201,151,42,0.3); color: var(--gold); }
+.phone { width: 275px; height: 575px; background: #0f0c08; border-radius: 38px; padding: 11px; box-shadow: 0 50px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.05); position: relative; }
+.phone::before { content: ''; position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 72px; height: 22px; background: #0f0c08; border-radius: 0 0 12px 12px; z-index: 10; }
+.screen { width: 100%; height: 100%; border-radius: 28px; overflow: hidden; position: relative; background: var(--warm-white); }
+
+/* ===== AI 问答 ===== */
+.ai-screen { background: var(--warm-white); }
+.ai-header {
+  background: linear-gradient(160deg, #1a2e18 0%, #2d4a28 60%, #3d5e35 100%);
+  padding: 38px 18px 16px; position: relative; overflow: hidden;
+}
+.ai-header::before { content: '智'; position: absolute; right: -8px; top: -18px; font-family: 'Noto Serif SC', serif; font-size: 110px; color: rgba(255,255,255,0.04); font-weight: 700; }
+.ai-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 20px; background: var(--warm-white); border-radius: 20px 20px 0 0; }
+.ai-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.ai-logo { display: flex; align-items: center; gap: 8px; }
+.ai-logo-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.ai-brand { font-family: 'Noto Serif SC', serif; color: white; font-size: 15px; font-weight: 600; }
+.ai-brand-sub { color: rgba(255,255,255,0.4); font-size: 9px; letter-spacing: 1px; }
+.ai-mode-btn { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); font-size: 9px; padding: 4px 10px; border-radius: 10px; }
+.ai-disclaimer { background: rgba(201,151,42,0.1); border: 1px solid rgba(201,151,42,0.2); border-radius: 10px; padding: 8px 10px; display: flex; gap: 6px; }
+.ai-disclaimer-text { font-size: 9px; color: rgba(201,151,42,0.8); line-height: 1.5; }
+.ai-chat-area { padding: 12px 14px; height: calc(100% - 224px); overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.chat-msg { display: flex; gap: 8px; align-items: flex-start; }
+.chat-msg.user { flex-direction: row-reverse; }
+.chat-avatar { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; font-family: 'Noto Serif SC', serif; font-weight: 600; }
+.ca-ai { background: linear-gradient(135deg, var(--moss), var(--sage)); color: white; }
+.ca-user { background: #f0ebe0; color: var(--muted); border: 1px solid #e0d8c8; }
+.chat-bubble { max-width: 80%; padding: 9px 12px; border-radius: 14px; font-size: 11px; line-height: 1.7; }
+.cb-ai { background: white; border: 1px solid #e8e0d0; color: #3a2e1e; border-radius: 4px 14px 14px 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+.cb-user { background: linear-gradient(135deg, #e8f2e4, #d8ecd0); border: 1px solid #c8e0c0; color: #2a3e22; border-radius: 14px 4px 14px 14px; }
+.triage-card { background: #f5f0e8; border: 1px solid #e0d8c0; border-radius: 10px; padding: 10px; margin-top: 8px; }
+.triage-title { color: var(--earth); font-size: 10px; font-weight: 600; letter-spacing: 1px; margin-bottom: 8px; }
+.triage-item { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid #ede5d5; }
+.triage-item:last-child { border-bottom: none; }
+.ti-level { width: 36px; text-align: center; font-size: 9px; padding: 2px 4px; border-radius: 5px; flex-shrink: 0; font-weight: 600; }
+.tl-mild { background: #e4f0e0; color: var(--moss); }
+.tl-mid { background: #f5e8d0; color: var(--earth); }
+.tl-severe { background: #f5e0d8; color: #c84a30; }
+.ti-text { font-size: 10px; color: #5a4a2e; line-height: 1.4; }
+.typing-row { display: flex; align-items: center; gap: 8px; }
+.typing-dots { display: flex; gap: 3px; }
+.typing-dot { width: 5px; height: 5px; background: var(--sage); border-radius: 50%; animation: pulse 1.2s infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+.typing-label { font-size: 10px; color: var(--muted); }
+.ai-input-area { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 14px 14px; background: white; border-top: 1px solid #f0ebe0; border-radius: 0 0 28px 28px; }
+.ai-quick-tags { display: flex; gap: 5px; margin-bottom: 8px; overflow-x: hidden; }
+.ai-quick-tag { background: #f5f0e8; border: 1px solid #e8e0d0; color: var(--muted); font-size: 9px; padding: 3px 8px; border-radius: 8px; white-space: nowrap; }
+.ai-input-row { display: flex; gap: 8px; align-items: center; }
+.ai-input-box { flex: 1; background: #f5f0e8; border: 1px solid #e0d8c8; border-radius: 20px; padding: 8px 14px; color: var(--muted); font-size: 11px; }
+.ai-send-btn { width: 32px; height: 32px; background: linear-gradient(135deg, var(--moss), var(--sage)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; color: white; box-shadow: 0 2px 8px rgba(74,103,65,0.3); }
+
+/* ===== 症状自查 ===== */
+.symptom-screen { background: var(--paper); }
+.sym-header {
+  background: linear-gradient(160deg, #1a1208 0%, #2e1e08 60%, #3e2c14 100%);
+  padding: 38px 18px 18px; position: relative; overflow: hidden;
+}
+.sym-header::before { content: '查'; position: absolute; right: -8px; top: -18px; font-family: 'Noto Serif SC', serif; font-size: 110px; color: rgba(255,255,255,0.04); font-weight: 700; }
+.sym-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 20px; background: var(--paper); border-radius: 20px 20px 0 0; }
+.sym-top { display: flex; justify-content: space-between; align-items: center; }
+.sym-title { font-family: 'Noto Serif SC', serif; color: white; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.sym-sub { color: rgba(255,255,255,0.4); font-size: 10px; letter-spacing: 1px; margin-top: 2px; }
+.sym-history-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); font-size: 9px; padding: 4px 10px; border-radius: 10px; }
+.sym-body { padding: 14px; overflow-y: auto; height: calc(100% - 125px); }
+.sym-input-card { background: white; border: 1px solid #e8e0d0; border-radius: 14px; padding: 12px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.sym-input-label { color: var(--earth); font-size: 10px; letter-spacing: 1px; margin-bottom: 8px; font-weight: 600; }
+.sym-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+.sym-chip { background: #f0ebe0; border: 1px solid #e0d8c8; color: var(--muted); font-size: 10px; padding: 4px 10px; border-radius: 10px; }
+.sym-chip.selected { background: #e4f0e0; border-color: #c0d8b8; color: var(--moss); font-weight: 500; }
+.sym-chip.add { background: #f8f5f0; border: 1px dashed #d0c8b8; color: var(--muted); }
+.sym-duration { display: flex; gap: 6px; margin-top: 4px; }
+.sym-dur-btn { flex: 1; text-align: center; padding: 5px; border-radius: 8px; font-size: 10px; background: #f5f0e8; border: 1px solid #e0d8c8; color: var(--muted); }
+.sym-dur-btn.active { background: #e4f0e0; border-color: #b8d8b0; color: var(--moss); font-weight: 500; }
+.analyze-btn { width: 100%; background: linear-gradient(135deg, var(--moss-deep), var(--moss)); border-radius: 12px; padding: 11px; text-align: center; color: white; font-size: 12px; font-weight: 600; letter-spacing: 1px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(74,103,65,0.25); }
+.result-section {}
+.result-label { color: var(--muted); font-size: 10px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
+.triage-result { border-radius: 14px; padding: 13px; margin-bottom: 10px; }
+.tr-mild { background: #eef6ec; border: 1px solid #c8e0c0; }
+.tr-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.tr-badge { padding: 3px 10px; border-radius: 10px; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+.trb-mild { background: #d4eed0; color: var(--moss); }
+.tr-level-text { font-family: 'Noto Serif SC', serif; font-size: 13px; font-weight: 600; color: var(--ink); }
+.tr-items { display: flex; flex-direction: column; gap: 6px; }
+.tr-item { display: flex; gap: 6px; align-items: flex-start; }
+.tri-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.trid-moss { background: var(--moss); }
+.tri-text { font-size: 11px; color: #3a4e32; line-height: 1.5; }
+.tcm-card { background: #faf5e8; border: 1px solid #e8d8b0; border-radius: 12px; padding: 12px; }
+.tcm-title { color: var(--earth); font-size: 10px; letter-spacing: 1px; margin-bottom: 8px; font-weight: 600; }
+.tcm-text { font-size: 11px; color: #5a4a2e; line-height: 1.7; }
+
+/* ===== 数据后台 ===== */
+.dashboard-screen { background: var(--paper); }
+.dash-header {
+  background: linear-gradient(160deg, #1a2e18 0%, #2d4a28 60%, #3d5e35 100%);
+  padding: 38px 18px 18px; position: relative; overflow: hidden;
+}
+.dash-header::before { content: '台'; position: absolute; right: -5px; top: -15px; font-family: 'Noto Serif SC', serif; font-size: 110px; color: rgba(255,255,255,0.04); font-weight: 700; }
+.dash-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 20px; background: var(--paper); border-radius: 20px 20px 0 0; }
+.dash-top { display: flex; justify-content: space-between; align-items: center; }
+.dash-title { font-family: 'Noto Serif SC', serif; color: white; font-size: 16px; font-weight: 700; }
+.dash-title-sub { color: rgba(255,255,255,0.4); font-size: 10px; letter-spacing: 1px; margin-top: 2px; }
+.dash-period { background: rgba(201,151,42,0.2); border: 1px solid rgba(201,151,42,0.35); color: var(--gold-light); font-size: 9px; padding: 4px 10px; border-radius: 10px; }
+.dash-body { padding: 12px; overflow-y: auto; height: calc(100% - 115px); }
+.kpi-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.kpi-card { border-radius: 12px; padding: 12px; }
+.kc-moss { background: #eef5ec; border: 1px solid #c8e0c0; }
+.kc-gold { background: #faf2e0; border: 1px solid #e8d4a0; }
+.kc-sage { background: #f0f5ee; border: 1px solid #c0d8b8; }
+.kc-earth { background: #faf0e8; border: 1px solid #e0c8a8; }
+.kpi-label { font-size: 9px; letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+.kc-moss .kpi-label { color: var(--moss); }
+.kc-gold .kpi-label { color: var(--earth); }
+.kc-sage .kpi-label { color: var(--sage); }
+.kc-earth .kpi-label { color: #9a6030; }
+.kpi-value { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.kpi-change { font-size: 9px; }
+.kc-moss .kpi-change { color: var(--moss); }
+.kc-gold .kpi-change { color: var(--earth); }
+.kc-sage .kpi-change { color: var(--sage); }
+.kc-earth .kpi-change { color: #9a6030; }
+.chart-section { background: white; border: 1px solid #e8e0d0; border-radius: 12px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.chart-title { color: var(--muted); font-size: 10px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
+.mini-chart { display: flex; align-items: flex-end; gap: 5px; height: 48px; }
+.chart-bar { flex: 1; border-radius: 3px 3px 0 0; }
+.cb-1 { height: 40%; background: #c8dfc4; }
+.cb-2 { height: 60%; background: #b8d4b2; }
+.cb-3 { height: 45%; background: #c8dfc4; }
+.cb-4 { height: 75%; background: #a8c8a0; }
+.cb-5 { height: 55%; background: #b8d4b2; }
+.cb-6 { height: 85%; background: #98bc90; }
+.cb-7 { height: 70%; background: #a8c8a0; }
+.cb-today { height: 92%; background: linear-gradient(180deg, var(--moss), #6a9c5a); box-shadow: 0 0 6px rgba(74,103,65,0.3); }
+.chart-labels { display: flex; justify-content: space-between; margin-top: 4px; }
+.chart-label { font-size: 8px; color: var(--muted); }
+.hot-title { color: var(--muted); font-size: 10px; letter-spacing: 2px; margin-bottom: 8px; text-transform: uppercase; }
+.hot-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #f0ebe0; }
+.hot-rank { width: 16px; font-family: 'Noto Serif SC', serif; font-size: 12px; font-weight: 700; text-align: center; flex-shrink: 0; }
+.hr-1 { color: var(--gold); }
+.hr-2 { color: var(--muted); }
+.hr-3 { color: var(--sage); }
+.hot-keyword { flex: 1; font-size: 11px; color: var(--ink); }
+.hot-bar-wrap { width: 55px; height: 4px; background: #f0ebe0; border-radius: 2px; overflow: hidden; }
+.hot-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--moss), var(--gold)); }
+
+/* ===== APP端 ===== */
+.app-screen { background: var(--warm-white); }
+.app-header {
+  background: linear-gradient(160deg, #1a1208 0%, #2e1e08 60%, #3e2c14 100%);
+  padding: 38px 18px 20px; position: relative; overflow: hidden;
+}
+.app-header::before { content: '命'; position: absolute; right: -8px; top: -18px; font-family: 'Noto Serif SC', serif; font-size: 110px; color: rgba(255,255,255,0.04); font-weight: 700; }
+.app-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 20px; background: var(--warm-white); border-radius: 20px 20px 0 0; }
+.app-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.app-logo-row { display: flex; align-items: center; gap: 8px; }
+.app-logo-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.app-logo-text { font-family: 'Noto Serif SC', serif; color: white; font-size: 15px; font-weight: 700; letter-spacing: 1px; }
+.app-logo-sub { color: rgba(255,255,255,0.4); font-size: 9px; letter-spacing: 2px; }
+.app-store-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); font-size: 8px; padding: 4px 8px; border-radius: 8px; letter-spacing: 1px; }
+.app-tagline { font-family: 'Noto Serif SC', serif; color: white; font-size: 17px; font-weight: 600; line-height: 1.5; margin-bottom: 12px; }
+.app-pills { display: flex; gap: 6px; }
+.app-pill { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); font-size: 9px; padding: 3px 9px; border-radius: 10px; }
+.app-pill.highlight { background: rgba(201,151,42,0.2); border-color: rgba(201,151,42,0.35); color: var(--gold-light); }
+.app-body { padding: 12px; overflow-y: auto; height: calc(100% - 175px); }
+.ai-entry-card { background: linear-gradient(135deg, #1a2e18, #243e22); border: 1px solid rgba(122,158,114,0.2); border-radius: 16px; padding: 14px; margin-bottom: 10px; position: relative; overflow: hidden; }
+.ai-entry-card::before { content: ''; position: absolute; top: -15px; right: -15px; width: 60px; height: 60px; background: radial-gradient(circle, rgba(201,151,42,0.12), transparent 70%); }
+.aec-badge { background: rgba(201,151,42,0.2); border: 1px solid rgba(201,151,42,0.3); color: var(--gold-light); font-size: 9px; padding: 2px 8px; border-radius: 8px; display: inline-block; margin-bottom: 8px; letter-spacing: 1px; }
+.aec-title { font-family: 'Noto Serif SC', serif; color: white; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.aec-desc { color: rgba(255,255,255,0.45); font-size: 10px; line-height: 1.5; margin-bottom: 10px; }
+.aec-btn { background: linear-gradient(135deg, var(--moss), var(--sage)); color: white; font-size: 11px; padding: 7px 16px; border-radius: 20px; display: inline-block; box-shadow: 0 3px 10px rgba(74,103,65,0.3); }
+.app-section-title { font-family: 'Noto Serif SC', serif; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+.app-section-title::before { content: ''; display: inline-block; width: 3px; height: 13px; background: var(--gold); border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.app-article-row { display: flex; gap: 8px; margin-bottom: 10px; overflow-x: hidden; }
+.app-art-card { width: 108px; flex-shrink: 0; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.aac-img { height: 58px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.aac-img-1 { background: linear-gradient(135deg, #e8f2e4, #d0ebca); }
+.aac-img-2 { background: linear-gradient(135deg, #f5ecd4, #eadaac); }
+.aac-img-3 { background: linear-gradient(135deg, #f5e8e4, #eacacа); }
+.aac-img-3 { background: linear-gradient(135deg, #f5e8e4, #eacac8); }
+.aac-info { padding: 7px 8px; }
+.aac-tag { font-size: 8px; color: var(--sage); margin-bottom: 3px; }
+.aac-title { font-size: 10px; color: var(--ink); font-family: 'Noto Serif SC', serif; line-height: 1.4; }
+.app-quick-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.aqt-card { border-radius: 12px; padding: 11px; display: flex; align-items: center; gap: 8px; }
+.aqt-1 { background: #eef5ec; border: 1px solid #c8e0c0; }
+.aqt-2 { background: #faf2e0; border: 1px solid #e8d4a0; }
+.aqt-3 { background: #f5f0e8; border: 1px solid #e0d8c8; }
+.aqt-4 { background: #f0f5ee; border: 1px solid #c0d8b8; }
+.aqt-icon { font-size: 18px; }
+.aqt-name { font-size: 11px; color: var(--ink); font-weight: 500; }
+.aqt-desc { font-size: 9px; color: var(--muted); margin-top: 1px; }
+
+/* ===== 底部导航 ===== */
+.bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 56px; background: white; border-top: 1px solid #f0ebe0; display: flex; align-items: center; justify-content: space-around; padding: 0 8px; border-radius: 0 0 28px 28px; }
+.nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.nav-icon { font-size: 17px; }
+.nav-text { font-size: 9px; color: #b0a080; }
+.nav-text.active { color: var(--moss); font-weight: 600; }
+
+/* ===== 底部说明 ===== */
+.info-section { margin-top: 50px; max-width: 1200px; width: 100%; }
+.info-title { text-align: center; font-family: 'Noto Serif SC', serif; color: rgba(255,255,255,0.4); font-size: 12px; letter-spacing: 4px; margin-bottom: 24px; }
+.info-grid { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.info-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 18px; width: 250px; }
+.ic-icon { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-bottom: 10px; }
+.fci-moss { background: rgba(74,103,65,0.2); }
+.fci-gold { background: rgba(201,151,42,0.2); }
+.ic-title { font-size: 12px; letter-spacing: 1px; color: var(--gold-light); margin-bottom: 8px; font-weight: 600; }
+.ic-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 7px; }
+.ic-dot { width: 5px; height: 5px; background: var(--sage); border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.ic-text { color: rgba(255,255,255,0.55); font-size: 12px; line-height: 1.5; }
+.price-area { margin-top: 36px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.price-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 18px 36px; text-align: center; }
+.price-card.highlight { border-color: rgba(201,151,42,0.3); background: rgba(201,151,42,0.05); }
+.pc-label { color: rgba(255,255,255,0.3); font-size: 10px; letter-spacing: 3px; margin-bottom: 6px; }
+.pc-value { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+.price-card .pc-value { color: rgba(255,255,255,0.4); }
+.price-card.highlight .pc-value { color: var(--gold-light); }
+.pc-sub { color: rgba(255,255,255,0.25); font-size: 10px; letter-spacing: 1px; }
+.plus-sign { color: rgba(255,255,255,0.2); font-size: 20px; }
+</style>
+</head>
+<body>
+<div class="page-eyebrow">治未病 · 懂生命</div>
+<div class="page-title">方案三 · 完整生态版</div>
+<div class="page-subtitle">AI问答 · 症状自查 · 数据后台 · 小程序+APP双端</div>
+<div class="badge">ULTIMATE EDITION</div>
+
+<div class="screens-row">
+
+  <!-- AI问答 -->
+  <div class="screen-col">
+    <div class="screen-label">AI 知识问答</div>
+    <div class="screen-tag">AI 驱动</div>
+    <div class="phone">
+      <div class="screen ai-screen">
+        <div class="ai-header">
+          <div class="ai-top">
+            <div class="ai-logo">
+              <div class="ai-logo-icon">☯</div>
+              <div><div class="ai-brand">治未病 AI</div><div class="ai-brand-sub">王医生知识库驱动</div></div>
+            </div>
+            <div class="ai-mode-btn">知识问答</div>
+          </div>
+          <div class="ai-disclaimer">
+            <div class="ai-disclaimer-text">⚠️ 本AI基于王医生知识库，仅提供健康科普引导，不构成医疗诊断建议</div>
+          </div>
+        </div>
+        <div class="ai-chat-area">
+          <div class="chat-msg user">
+            <div class="chat-avatar ca-user">我</div>
+            <div class="chat-bubble cb-user">我最近反复头痛，后脑勺胀，持续了一周，要不要去医院？</div>
+          </div>
+          <div class="chat-msg">
+            <div class="chat-avatar ca-ai">王</div>
+            <div class="chat-bubble cb-ai">
+              根据您的症状，为您做了初步分级判断👇
+              <div class="triage-card">
+                <div class="triage-title">症状分级结果</div>
+                <div class="triage-item"><div class="ti-level tl-mild">轻微</div><div class="ti-text">后枕胀痛多与颈椎紧张有关，先热敷+拉伸</div></div>
+                <div class="triage-item"><div class="ti-level tl-mid">中等</div><div class="ti-text">若伴随血压升高或视物模糊，建议测量血压</div></div>
+                <div class="triage-item"><div class="ti-level tl-severe">紧急</div><div class="ti-text">若突发剧烈头痛如"霹雳样"，立即就医</div></div>
+              </div>
+              从中医看，后枕属膀胱经循行，可试试…
+            </div>
+          </div>
+          <div class="chat-msg user">
+            <div class="chat-avatar ca-user">我</div>
+            <div class="chat-bubble cb-user">没有血压高，就是颈椎不舒服，中医有什么调理方法？</div>
+          </div>
+          <div class="chat-msg">
+            <div class="chat-avatar ca-ai">王</div>
+            <div class="typing-row">
+              <div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
+              <div class="typing-label">正在整合知识库…</div>
+            </div>
+          </div>
+        </div>
+        <div class="ai-input-area">
+          <div class="ai-quick-tags">
+            <div class="ai-quick-tag">💊 用药建议</div>
+            <div class="ai-quick-tag">🌿 中医调理</div>
+            <div class="ai-quick-tag">🏥 要去医院吗</div>
+          </div>
+          <div class="ai-input-row">
+            <div class="ai-input-box">描述您的症状…</div>
+            <div class="ai-send-btn">↑</div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-text">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-text">社区</div></div>
+          <div class="nav-item"><div class="nav-icon">☯</div><div class="nav-text active">AI问答</div></div>
+          <div class="nav-item"><div class="nav-icon">📚</div><div class="nav-text">分类</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-text">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 症状自查 -->
+  <div class="screen-col">
+    <div class="screen-label">症状自查分流</div>
+    <div class="screen-tag">三级分流</div>
+    <div class="phone">
+      <div class="screen symptom-screen">
+        <div class="sym-header">
+          <div class="sym-top">
+            <div><div class="sym-title">症状自查</div><div class="sym-sub">告诉我你的感受</div></div>
+            <div class="sym-history-btn">历史记录</div>
+          </div>
+        </div>
+        <div class="sym-body">
+          <div class="sym-input-card">
+            <div class="sym-input-label">选择症状 · 可多选</div>
+            <div class="sym-chips">
+              <div class="sym-chip selected">头痛</div>
+              <div class="sym-chip selected">颈部酸胀</div>
+              <div class="sym-chip">发烧</div>
+              <div class="sym-chip">咳嗽</div>
+              <div class="sym-chip">疲劳</div>
+              <div class="sym-chip add">+ 其他</div>
+            </div>
+            <div class="sym-input-label" style="margin-top:8px;">持续时间</div>
+            <div class="sym-duration">
+              <div class="sym-dur-btn">1天内</div>
+              <div class="sym-dur-btn active">1周</div>
+              <div class="sym-dur-btn">1月+</div>
+            </div>
+          </div>
+          <div class="analyze-btn">☯ 开始智能分析</div>
+          <div class="result-section">
+            <div class="result-label">分析结果</div>
+            <div class="triage-result tr-mild">
+              <div class="tr-header">
+                <div class="tr-badge trb-mild">轻微</div>
+                <div class="tr-level-text">无需立即就医</div>
+              </div>
+              <div class="tr-items">
+                <div class="tr-item"><div class="tri-dot trid-moss"></div><div class="tri-text">符合颈源性头痛特征，与颈椎紧张有关</div></div>
+                <div class="tr-item"><div class="tri-dot trid-moss"></div><div class="tri-text">建议热敷颈部、调整枕头高度、减少低头</div></div>
+                <div class="tr-item"><div class="tri-dot trid-moss"></div><div class="tri-text">2周内无好转，可至社区医院就诊</div></div>
+              </div>
+            </div>
+            <div class="tcm-card">
+              <div class="tcm-title">🌿 中医调理建议</div>
+              <div class="tcm-text">后枕属足太阳膀胱经，可按摩风池穴（耳后颈部凹陷处）每次3分钟，配合葛根汤调理效果更佳，注意保暖避免颈部受寒…</div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-text">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-text">社区</div></div>
+          <div class="nav-item"><div class="nav-icon">☯</div><div class="nav-text active">自查</div></div>
+          <div class="nav-item"><div class="nav-icon">📚</div><div class="nav-text">分类</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-text">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 数据后台 -->
+  <div class="screen-col">
+    <div class="screen-label">运营数据后台</div>
+    <div class="screen-tag">后台管理</div>
+    <div class="phone">
+      <div class="screen dashboard-screen">
+        <div class="dash-header">
+          <div class="dash-top">
+            <div><div class="dash-title">运营总览</div><div class="dash-title-sub">王医生专属后台</div></div>
+            <div class="dash-period">本月 ▾</div>
+          </div>
+        </div>
+        <div class="dash-body">
+          <div class="kpi-row">
+            <div class="kpi-card kc-moss"><div class="kpi-label">总用户数</div><div class="kpi-value">8,420</div><div class="kpi-change">↑ 本月 +312</div></div>
+            <div class="kpi-card kc-gold"><div class="kpi-label">AI问答次数</div><div class="kpi-value">2,841</div><div class="kpi-change">↑ 较上月 +28%</div></div>
+            <div class="kpi-card kc-sage"><div class="kpi-label">会员收入</div><div class="kpi-value">¥9,604</div><div class="kpi-change">↑ 新增 98人</div></div>
+            <div class="kpi-card kc-earth"><div class="kpi-label">文章阅读量</div><div class="kpi-value">46,230</div><div class="kpi-change">↑ 日均 1,541</div></div>
+          </div>
+          <div class="chart-section">
+            <div class="chart-title">近8日用户增长</div>
+            <div class="mini-chart">
+              <div class="chart-bar cb-1"></div><div class="chart-bar cb-2"></div><div class="chart-bar cb-3"></div><div class="chart-bar cb-4"></div><div class="chart-bar cb-5"></div><div class="chart-bar cb-6"></div><div class="chart-bar cb-7"></div><div class="chart-bar cb-today"></div>
+            </div>
+            <div class="chart-labels"><span class="chart-label">3/5</span><span class="chart-label">3/6</span><span class="chart-label">3/7</span><span class="chart-label">3/8</span><span class="chart-label">3/9</span><span class="chart-label">3/10</span><span class="chart-label">3/11</span><span class="chart-label">今日</span></div>
+          </div>
+          <div class="hot-title">热门搜索词</div>
+          <div class="hot-item"><div class="hot-rank hr-1">1</div><div class="hot-keyword">肺结节要不要手术</div><div class="hot-bar-wrap"><div class="hot-bar-fill" style="width:90%"></div></div></div>
+          <div class="hot-item"><div class="hot-rank hr-2">2</div><div class="hot-keyword">高血压能根治吗</div><div class="hot-bar-wrap"><div class="hot-bar-fill" style="width:72%"></div></div></div>
+          <div class="hot-item"><div class="hot-rank hr-3">3</div><div class="hot-keyword">小孩咳嗽用不用药</div><div class="hot-bar-wrap"><div class="hot-bar-fill" style="width:58%"></div></div></div>
+          <div class="hot-item"><div class="hot-rank" style="color:var(--muted)">4</div><div class="hot-keyword">治未病是什么意思</div><div class="hot-bar-wrap"><div class="hot-bar-fill" style="width:44%"></div></div></div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">📊</div><div class="nav-text active">总览</div></div>
+          <div class="nav-item"><div class="nav-icon">📝</div><div class="nav-text">内容</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-text">用户</div></div>
+          <div class="nav-item"><div class="nav-icon">💰</div><div class="nav-text">收入</div></div>
+          <div class="nav-item"><div class="nav-icon">⚙️</div><div class="nav-text">设置</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP端 -->
+  <div class="screen-col">
+    <div class="screen-label">独立 APP 端</div>
+    <div class="screen-tag">APP 专属</div>
+    <div class="phone">
+      <div class="screen app-screen">
+        <div class="app-header">
+          <div class="app-top">
+            <div class="app-logo-row">
+              <div class="app-logo-icon">☯</div>
+              <div><div class="app-logo-text">治未病</div><div class="app-logo-sub">懂生命</div></div>
+            </div>
+            <div class="app-store-badge">App Store ✓</div>
+          </div>
+          <div class="app-tagline">你的身体，<br>你来读懂它</div>
+          <div class="app-pills">
+            <div class="app-pill highlight">☯ AI问答</div>
+            <div class="app-pill">症状自查</div>
+            <div class="app-pill">离线阅读</div>
+          </div>
+        </div>
+        <div class="app-body">
+          <div class="ai-entry-card">
+            <div class="aec-badge">☯ AI 知识问答</div>
+            <div class="aec-title">有症状？先问问AI</div>
+            <div class="aec-desc">基于王医生知识库训练，中西医结合视角，告诉你该不该去医院</div>
+            <div class="aec-btn">开始对话 →</div>
+          </div>
+          <div class="app-section-title">今日推荐</div>
+          <div class="app-article-row">
+            <div class="app-art-card"><div class="aac-img aac-img-1">🫁</div><div class="aac-info"><div class="aac-tag">肺结节</div><div class="aac-title">发现结节先别慌</div></div></div>
+            <div class="app-art-card"><div class="aac-img aac-img-2">🌿</div><div class="aac-info"><div class="aac-tag">中医之道</div><div class="aac-title">情绪与疾病关系</div></div></div>
+            <div class="app-art-card"><div class="aac-img aac-img-3">❤️</div><div class="aac-info"><div class="aac-tag">高血压</div><div class="aac-title">降压之外还要做什么</div></div></div>
+          </div>
+          <div class="app-section-title">快捷工具</div>
+          <div class="app-quick-tools">
+            <div class="aqt-card aqt-1"><div class="aqt-icon">🔍</div><div><div class="aqt-name">症状自查</div><div class="aqt-desc">三级分流引导</div></div></div>
+            <div class="aqt-card aqt-2"><div class="aqt-icon">☯</div><div><div class="aqt-name">AI问答</div><div class="aqt-desc">知识库驱动</div></div></div>
+            <div class="aqt-card aqt-3"><div class="aqt-icon">📚</div><div><div class="aqt-name">知识库</div><div class="aqt-desc">离线可用</div></div></div>
+            <div class="aqt-card aqt-4"><div class="aqt-icon">🌿</div><div><div class="aqt-name">中医专栏</div><div class="aqt-desc">王医生精选</div></div></div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-text active">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">☯</div><div class="nav-text">AI</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-text">社区</div></div>
+          <div class="nav-item"><div class="nav-icon">📚</div><div class="nav-text">内容</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-text">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="info-section">
+  <div class="info-title">方案三 · 核心新增能力</div>
+  <div class="info-grid">
+    <div class="info-card"><div class="ic-icon fci-moss">☯</div><div class="ic-title">AI 知识问答</div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">用王医生内容训练专属AI</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">纠正通用AI中医知识偏差</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">用户提问获得中西医结合引导</div></div></div>
+    <div class="info-card"><div class="ic-icon fci-gold">🔍</div><div class="ic-title">症状三级分流</div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">轻微→居家调理</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">中等→社区就诊建议</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">严重→立即就医提示</div></div></div>
+    <div class="info-card"><div class="ic-icon fci-moss">📊</div><div class="ic-title">运营数据后台</div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">用户数/阅读量/会员收入总览</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">热门搜索词洞察用户需求</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">王医生专属管理端</div></div></div>
+    <div class="info-card"><div class="ic-icon fci-gold">📱</div><div class="ic-title">小程序 + APP 双端</div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">小程序负责传播引流</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">APP提供离线阅读+推送通知</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">双端数据实时同步</div></div></div>
+  </div>
+  <div class="price-area">
+    <div class="price-card"><div class="pc-label">方案一二基础</div><div class="pc-value">6—8万</div><div class="pc-sub">已含全部基础功能</div></div>
+    <div class="plus-sign">+</div>
+    <div class="price-card highlight"><div class="pc-label">方案三完整生态</div><div class="pc-value">12—15万</div><div class="pc-sub">AI + 症状分流 + 数据后台 + APP · 90天交付</div></div>
+  </div>
+</div>
+</body>
+</html>

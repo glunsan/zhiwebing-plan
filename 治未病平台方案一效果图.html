@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>治未病 · 懂生命 — 小程序效果图</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --earth: #8B6914;
+    --moss: #4a6741;
+    --mist: #f5f0e8;
+    --paper: #faf7f2;
+    --warm-white: #fffdf9;
+    --gold: #c9972a;
+    --sage: #7a9e72;
+    --rust: #a84e2a;
+    --cream: #e8dfc8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #2c2416;
+    font-family: 'Noto Sans SC', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba(201,151,42,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(74,103,65,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .page-title {
+    color: var(--cream);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+
+  .page-subtitle {
+    color: var(--gold);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 48px;
+  }
+
+  .screens-container {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+  }
+
+  .screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .screen-label {
+    color: var(--cream);
+    font-size: 12px;
+    letter-spacing: 3px;
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+
+  .phone {
+    width: 280px;
+    height: 580px;
+    background: #0f0c08;
+    border-radius: 36px;
+    padding: 12px;
+    box-shadow: 
+      0 40px 80px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(255,255,255,0.05),
+      inset 0 0 0 1px rgba(255,255,255,0.03);
+    position: relative;
+  }
+
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 24px;
+    background: #0f0c08;
+    border-radius: 0 0 14px 14px;
+    z-index: 10;
+  }
+
+  .screen {
+    width: 100%;
+    height: 100%;
+    background: var(--paper);
+    border-radius: 26px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ===== 首页 ===== */
+  .home-screen {
+    background: var(--warm-white);
+  }
+
+  .home-header {
+    background: linear-gradient(160deg, #1a2e18 0%, #2d4a28 60%, #3d5e35 100%);
+    padding: 40px 20px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .home-header::before {
+    content: '生';
+    position: absolute;
+    right: -10px;
+    top: -20px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.04);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .home-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    height: 20px;
+    background: var(--warm-white);
+    border-radius: 20px 20px 0 0;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--gold), #e8b84b);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .logo-text {
+    font-family: 'Noto Serif SC', serif;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .logo-sub {
+    color: rgba(255,255,255,0.5);
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-top: 1px;
+  }
+
+  .header-avatar {
+    width: 30px;
+    height: 30px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .header-greeting {
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .header-tagline {
+    font-family: 'Noto Serif SC', serif;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 1.4;
+  }
+
+  .home-body {
+    padding: 16px 16px 0;
+    overflow-y: auto;
+    height: calc(100% - 160px);
+  }
+
+  .search-bar {
+    background: #f0ebe0;
+    border-radius: 20px;
+    padding: 9px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .search-icon { font-size: 12px; opacity: 0.4; }
+  .search-text { font-size: 12px; color: #9e8e6e; letter-spacing: 0.5px; }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.5px;
+  }
+
+  .section-title::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 14px;
+    background: var(--gold);
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .section-more {
+    font-size: 10px;
+    color: var(--sage);
+    letter-spacing: 0.5px;
+  }
+
+  .category-scroll {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    overflow-x: hidden;
+  }
+
+  .cat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    min-width: 52px;
+  }
+
+  .cat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .cat-icon.green { background: linear-gradient(135deg, #d4edcc, #b8deb0); }
+  .cat-icon.gold { background: linear-gradient(135deg, #f0e0b0, #e8cc88); }
+  .cat-icon.rust { background: linear-gradient(135deg, #f0d4c8, #e8b8a0); }
+  .cat-icon.blue { background: linear-gradient(135deg, #c8d8f0, #a8c0e8); }
+  .cat-icon.purple { background: linear-gradient(135deg, #dcc8f0, #c8a8e8); }
+
+  .cat-name {
+    font-size: 10px;
+    color: #6b5c3e;
+    text-align: center;
+    letter-spacing: 0.3px;
+  }
+
+  .featured-card {
+    background: linear-gradient(135deg, #1e3a1a 0%, #2d5226 100%);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .featured-card::before {
+    content: '☯';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    opacity: 0.08;
+  }
+
+  .featured-tag {
+    background: var(--gold);
+    color: #1a0e00;
+    font-size: 9px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .featured-title {
+    font-family: 'Noto Serif SC', serif;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .featured-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .featured-author {
+    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+  }
+
+  .featured-reads {
+    color: rgba(255,255,255,0.4);
+    font-size: 10px;
+  }
+
+  .article-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .article-item {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .article-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  .thumb-green { background: linear-gradient(135deg, #e8f5e4, #d0ebca); }
+  .thumb-warm { background: linear-gradient(135deg, #f5ede0, #ecd8c0); }
+  .thumb-cool { background: linear-gradient(135deg, #e4eef5, #ccdcea); }
+
+  .article-info { flex: 1; min-width: 0; }
+
+  .article-tag {
+    font-size: 9px;
+    color: var(--sage);
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .article-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .meta-text {
+    font-size: 9px;
+    color: #b0a080;
+  }
+
+  .bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 56px;
+    background: white;
+    border-top: 1px solid #f0ebe0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 10px;
+    border-radius: 0 0 26px 26px;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .nav-icon { font-size: 18px; }
+  .nav-text { font-size: 9px; color: #b0a080; }
+  .nav-text.active { color: var(--moss); font-weight: 600; }
+  .nav-icon.active { filter: none; }
+
+  /* ===== 文章详情页 ===== */
+  .article-screen { background: var(--warm-white); }
+
+  .article-header {
+    padding: 44px 20px 16px;
+    background: white;
+    border-bottom: 1px solid #f0ebe0;
+  }
+
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--moss);
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+
+  .article-category-badge {
+    background: #e8f2e4;
+    color: var(--moss);
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .article-main-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .author-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .author-avatar {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #4a6741, #6a8e60);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-family: 'Noto Serif SC', serif;
+  }
+
+  .author-info {}
+  .author-name { font-size: 12px; font-weight: 600; color: var(--ink); }
+  .author-title { font-size: 10px; color: #9e8e6e; }
+
+  .article-content-area {
+    padding: 16px 20px;
+    overflow-y: auto;
+    height: calc(100% - 200px);
+  }
+
+  .content-quote {
+    background: linear-gradient(135deg, #f5f0e4, #ede8da);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+  }
+
+  .quote-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    color: #5a4a2e;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .content-para {
+    font-size: 12px;
+    color: #4a3e2a;
+    line-height: 1.9;
+    margin-bottom: 14px;
+  }
+
+  .content-highlight {
+    background: #fef6e4;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    border: 1px solid #f0e0b0;
+  }
+
+  .highlight-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--earth);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 11px;
+    color: #6b5a3e;
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+
+  .highlight-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .article-actions {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 56px;
+    background: white;
+    border-top: 1px solid #f0ebe0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 20px;
+    border-radius: 0 0 26px 26px;
+  }
+
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: #9e8e6e;
+  }
+
+  .action-btn.primary {
+    background: var(--moss);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+
+  /* ===== 分类页 ===== */
+  .category-screen { background: var(--warm-white); }
+
+  .cat-header {
+    background: linear-gradient(160deg, #2d1e0e 0%, #4a3218 100%);
+    padding: 44px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cat-header::before {
+    content: '道';
+    position: absolute;
+    right: -5px;
+    top: -15px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 100px;
+    color: rgba(255,255,255,0.05);
+    font-weight: 700;
+  }
+
+  .cat-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    height: 20px;
+    background: var(--warm-white);
+    border-radius: 20px 20px 0 0;
+  }
+
+  .cat-header-title {
+    font-family: 'Noto Serif SC', serif;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .cat-header-sub {
+    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .cat-body {
+    padding: 16px;
+    overflow-y: auto;
+    height: calc(100% - 140px);
+  }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .cat-card {
+    border-radius: 14px;
+    padding: 14px 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cat-card.moss { background: linear-gradient(135deg, #e8f2e4, #d4ebcc); }
+  .cat-card.earth { background: linear-gradient(135deg, #f5ede0, #ead8c0); }
+  .cat-card.rust { background: linear-gradient(135deg, #f5e4dc, #eac8b8); }
+  .cat-card.blue { background: linear-gradient(135deg, #dce8f5, #c4d8ea); }
+  .cat-card.sage { background: linear-gradient(135deg, #e4eee0, #cce0c4); }
+  .cat-card.gold-light { background: linear-gradient(135deg, #f5ecd4, #eadaac); }
+
+  .cat-card-emoji {
+    font-size: 22px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .cat-card-name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .cat-card-count {
+    font-size: 10px;
+    color: #8a7a5a;
+  }
+
+  .cat-card-arrow {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    font-size: 12px;
+    opacity: 0.3;
+  }
+
+  .recent-section { margin-top: 4px; }
+
+  .mini-article {
+    background: white;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .mini-title {
+    font-size: 12px;
+    color: var(--ink);
+    font-family: 'Noto Serif SC', serif;
+    flex: 1;
+    line-height: 1.4;
+  }
+
+  .mini-count {
+    font-size: 10px;
+    color: #b0a080;
+    margin-left: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ===== 个人主页 ===== */
+  .profile-screen { background: var(--warm-white); }
+
+  .profile-header {
+    background: linear-gradient(160deg, #0e1e2c 0%, #1a3040 100%);
+    padding: 44px 20px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .profile-header::before {
+    content: '医';
+    position: absolute;
+    right: 10px;
+    top: -10px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 100px;
+    color: rgba(255,255,255,0.04);
+    font-weight: 700;
+  }
+
+  .profile-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    height: 20px;
+    background: var(--warm-white);
+    border-radius: 20px 20px 0 0;
+  }
+
+  .profile-avatar-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .profile-avatar {
+    width: 68px;
+    height: 68px;
+    background: linear-gradient(135deg, #4a6741, #7aaa6a);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif SC', serif;
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    border: 3px solid rgba(255,255,255,0.2);
+  }
+
+  .profile-verified {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 20px;
+    height: 20px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    border: 2px solid #0e1e2c;
+  }
+
+  .profile-name {
+    font-family: 'Noto Serif SC', serif;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .profile-title-tag {
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 16px;
+  }
+
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Noto Serif SC', serif;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .stat-label {
+    color: rgba(255,255,255,0.4);
+    font-size: 10px;
+    margin-top: 2px;
+  }
+
+  .profile-body {
+    padding: 16px;
+    overflow-y: auto;
+    height: calc(100% - 220px);
+  }
+
+  .intro-card {
+    background: white;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  .intro-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .intro-text {
+    font-size: 11px;
+    color: #6b5a3e;
+    line-height: 1.8;
+  }
+
+  .philosophy-card {
+    background: linear-gradient(135deg, #1e3a18, #2d5226);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+
+  .philosophy-text {
+    font-family: 'Noto Serif SC', serif;
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    line-height: 1.8;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  .philosophy-divider {
+    text-align: center;
+    color: var(--gold);
+    font-size: 16px;
+    margin: 8px 0;
+  }
+
+  .expertise-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .exp-tag {
+    background: #f0ebe0;
+    color: #6b5a3e;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.3px;
+  }
+
+  .recent-articles {}
+
+  .profile-article {
+    background: white;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .profile-art-info {}
+  .profile-art-tag {
+    font-size: 9px;
+    color: var(--sage);
+    margin-bottom: 4px;
+  }
+  .profile-art-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .profile-art-reads {
+    font-size: 10px;
+    color: #b0a080;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+
+  /* description labels */
+  .desc-container {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1100px;
+    margin-top: 40px;
+  }
+
+  .desc-block {
+    width: 280px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .desc-title {
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .desc-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .desc-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--sage);
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .desc-text {
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .price-tag {
+    margin-top: 40px;
+    background: rgba(201,151,42,0.1);
+    border: 1px solid rgba(201,151,42,0.3);
+    border-radius: 20px;
+    padding: 16px 40px;
+    text-align: center;
+  }
+
+  .price-label {
+    color: rgba(255,255,255,0.5);
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+
+  .price-value {
+    font-family: 'Noto Serif SC', serif;
+    color: var(--gold);
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .price-sub {
+    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-title">方案一 · 轻量起步版</div>
+<div class="page-subtitle">治未病 · 懂生命 小程序效果图</div>
+
+<div class="screens-container">
+
+  <!-- 首页 -->
+  <div class="screen-wrapper">
+    <div class="screen-label">首页</div>
+    <div class="phone">
+      <div class="screen home-screen">
+        <div class="home-header">
+          <div class="header-top">
+            <div class="logo-area">
+              <div class="logo-icon">☯</div>
+              <div>
+                <div class="logo-text">治未病</div>
+                <div class="logo-sub">懂生命 · 知健康</div>
+              </div>
+            </div>
+            <div class="header-avatar">👤</div>
+          </div>
+          <div class="header-greeting">今日养生提示</div>
+          <div class="header-tagline">不知死，<br>何以生</div>
+        </div>
+
+        <div class="home-body">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <span class="search-text">搜索症状、疾病、养生知识…</span>
+          </div>
+
+          <div class="section-header">
+            <div class="section-title">分类浏览</div>
+          </div>
+
+          <div class="category-scroll">
+            <div class="cat-item">
+              <div class="cat-icon green">🌿</div>
+              <div class="cat-name">治未病</div>
+            </div>
+            <div class="cat-item">
+              <div class="cat-icon gold">🫁</div>
+              <div class="cat-name">常见病</div>
+            </div>
+            <div class="cat-item">
+              <div class="cat-icon rust">❤️</div>
+              <div class="cat-name">心身合一</div>
+            </div>
+            <div class="cat-item">
+              <div class="cat-icon blue">🧒</div>
+              <div class="cat-name">育儿健康</div>
+            </div>
+            <div class="cat-item">
+              <div class="cat-icon purple">🧘</div>
+              <div class="cat-name">中医之道</div>
+            </div>
+          </div>
+
+          <div class="section-header">
+            <div class="section-title">王医生推荐</div>
+            <div class="section-more">查看全部 →</div>
+          </div>
+
+          <div class="featured-card">
+            <div class="featured-tag">精选</div>
+            <div class="featured-title">血压高了就降压？<br>你可能从未想过背后的原因</div>
+            <div class="featured-meta">
+              <span class="featured-author">👩‍⚕️ 王誉瑾医生</span>
+              <span class="featured-reads">👁 2,841次阅读</span>
+            </div>
+          </div>
+
+          <div class="article-list">
+            <div class="article-item">
+              <div class="article-thumb thumb-green">🫁</div>
+              <div class="article-info">
+                <div class="article-tag">肺结节 · 中西医</div>
+                <div class="article-title">发现肺结节别慌，这样判断要不要去医院</div>
+                <div class="article-meta">
+                  <span class="meta-text">👁 1,204</span>
+                  <span class="meta-text">❤️ 收藏 98</span>
+                </div>
+              </div>
+            </div>
+            <div class="article-item">
+              <div class="article-thumb thumb-warm">🌿</div>
+              <div class="article-info">
+                <div class="article-tag">治未病 · 生活方式</div>
+                <div class="article-title">我的孩子10年从未用药，这是怎么做到的</div>
+                <div class="article-meta">
+                  <span class="meta-text">👁 3,102</span>
+                  <span class="meta-text">❤️ 收藏 241</span>
+                </div>
+              </div>
+            </div>
+            <div class="article-item">
+              <div class="article-thumb thumb-cool">🧘</div>
+              <div class="article-info">
+                <div class="article-tag">心身合一 · 情绪</div>
+                <div class="article-title">很多病是"想"出来的，中医早就知道了</div>
+                <div class="article-meta">
+                  <span class="meta-text">👁 876</span>
+                  <span class="meta-text">❤️ 收藏 67</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-nav">
+          <div class="nav-item">
+            <div class="nav-icon active">🏠</div>
+            <div class="nav-text active">首页</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon">📚</div>
+            <div class="nav-text">分类</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon">🔖</div>
+            <div class="nav-text">收藏</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon">👤</div>
+            <div class="nav-text">我的</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 文章详情页 -->
+  <div class="screen-wrapper">
+    <div class="screen-label">文章详情</div>
+    <div class="phone">
+      <div class="screen article-screen">
+        <div class="article-header">
+          <div class="back-btn">← 返回</div>
+          <div class="article-category-badge">🫁 常见病 · 肺结节</div>
+          <div class="article-main-title">发现肺结节别慌，这样判断要不要去医院</div>
+          <div class="author-row">
+            <div class="author-avatar">王</div>
+            <div class="author-info">
+              <div class="author-name">王誉瑾</div>
+              <div class="author-title">医学博士 · 中西医结合</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-content-area">
+          <div class="content-quote">
+            <div class="quote-text">"治未病者，圣人也。不治已病治未病，不治已乱治未乱。"</div>
+          </div>
+
+          <div class="content-para">
+            很多人体检发现肺结节，第一反应是恐慌。但其实，大部分肺结节是良性的，不需要立刻手术。问题在于，我们从来没有人告诉我们该怎么判断。
+          </div>
+
+          <div class="content-highlight">
+            <div class="highlight-title">📌 王医生的判断标准</div>
+            <div class="highlight-item">
+              <div class="highlight-dot"></div>
+              <div>结节小于6mm：定期随访，无需治疗</div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-dot"></div>
+              <div>6-8mm磨玻璃结节：3个月后复查CT</div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-dot"></div>
+              <div>结节在增大：才需要考虑进一步检查</div>
+            </div>
+          </div>
+
+          <div class="content-para">
+            从中医角度来看，结节的形成往往与痰湿淤积有关。调整饮食习惯、保持情绪稳定，是比手术更根本的解决方式……
+          </div>
+        </div>
+
+        <div class="article-actions">
+          <div class="action-btn">❤️ 收藏</div>
+          <div class="action-btn">💬 评论</div>
+          <div class="action-btn">📤 分享</div>
+          <div class="action-btn primary">继续阅读</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 分类页 -->
+  <div class="screen-wrapper">
+    <div class="screen-label">分类浏览</div>
+    <div class="phone">
+      <div class="screen category-screen">
+        <div class="cat-header">
+          <div class="cat-header-title">知识分类</div>
+          <div class="cat-header-sub">从了解生命开始</div>
+        </div>
+
+        <div class="cat-body">
+          <div class="cat-grid">
+            <div class="cat-card moss">
+              <span class="cat-card-emoji">🌿</span>
+              <div class="cat-card-name">治未病</div>
+              <div class="cat-card-count">28篇文章</div>
+              <div class="cat-card-arrow">→</div>
+            </div>
+            <div class="cat-card earth">
+              <span class="cat-card-emoji">🫁</span>
+              <div class="cat-card-name">常见病解析</div>
+              <div class="cat-card-count">45篇文章</div>
+              <div class="cat-card-arrow">→</div>
+            </div>
+            <div class="cat-card rust">
+              <span class="cat-card-emoji">❤️‍🩹</span>
+              <div class="cat-card-name">心身合一</div>
+              <div class="cat-card-count">19篇文章</div>
+              <div class="cat-card-arrow">→</div>
+            </div>
+            <div class="cat-card blue">
+              <span class="cat-card-emoji">🧒</span>
+              <div class="cat-card-name">育儿健康</div>
+              <div class="cat-card-count">22篇文章</div>
+              <div class="cat-card-arrow">→</div>
+            </div>
+            <div class="cat-card sage">
+              <span class="cat-card-emoji">🧘</span>
+              <div class="cat-card-name">中医之道</div>
+              <div class="cat-card-count">33篇文章</div>
+              <div class="cat-card-arrow">→</div>
+            </div>
+            <div class="cat-card gold-light">
+              <span class="cat-card-emoji">🌱</span>
+              <div class="cat-card-name">生命成长</div>
+              <div class="cat-card-count">16篇文章</div>
+              <div class="cat-card-arrow">→</div>
+            </div>
+          </div>
+
+          <div class="recent-section">
+            <div class="section-header">
+              <div class="section-title">最新发布</div>
+              <div class="section-more">全部 →</div>
+            </div>
+            <div class="mini-article">
+              <div class="mini-title">糖尿病只管降糖？你忽略的才是关键</div>
+              <div class="mini-count">👁 921</div>
+            </div>
+            <div class="mini-article">
+              <div class="mini-title">咳嗽两周不好，不一定要吃消炎药</div>
+              <div class="mini-count">👁 682</div>
+            </div>
+            <div class="mini-article">
+              <div class="mini-title">情绪与疾病的关系，比你想的深得多</div>
+              <div class="mini-count">👁 1,103</div>
+            </div>
+            <div class="mini-article">
+              <div class="mini-title">老人骨质疏松，不只是缺钙这么简单</div>
+              <div class="mini-count">👁 444</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-nav">
+          <div class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-text">首页</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon active">📚</div>
+            <div class="nav-text active">分类</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon">🔖</div>
+            <div class="nav-text">收藏</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon">👤</div>
+            <div class="nav-text">我的</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 王医生主页 -->
+  <div class="screen-wrapper">
+    <div class="screen-label">王医生主页</div>
+    <div class="phone">
+      <div class="screen profile-screen">
+        <div class="profile-header">
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar">王</div>
+            <div class="profile-verified">✓</div>
+          </div>
+          <div class="profile-name">王誉瑾</div>
+          <div class="profile-title-tag">医学博士 · 中西医结合 · 科研管理</div>
+          <div class="profile-stats">
+            <div class="stat-item">
+              <div class="stat-num">163</div>
+              <div class="stat-label">篇文章</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">8,420</div>
+              <div class="stat-label">读者</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">12年</div>
+              <div class="stat-label">从医经验</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-body">
+          <div class="philosophy-card">
+            <div class="philosophy-text">不知死，何以生</div>
+            <div class="philosophy-divider">· · ·</div>
+            <div class="philosophy-text" style="font-size:11px; opacity:0.7;">治未病 · 防微杜渐 · 心身合一</div>
+          </div>
+
+          <div class="intro-card">
+            <div class="intro-title">关于我</div>
+            <div class="intro-text">医学博士，中西医结合背景，从事科研管理与设计多年。亲身实践治未病理念，孩子十年无需就医。致力于用接地气的方式，让每个人真正了解自己的身体。</div>
+          </div>
+
+          <div class="expertise-tags">
+            <span class="exp-tag">🌿 中西医结合</span>
+            <span class="exp-tag">🫁 常见病解析</span>
+            <span class="exp-tag">❤️ 心身医学</span>
+            <span class="exp-tag">🧒 儿童健康</span>
+            <span class="exp-tag">☯ 生命哲学</span>
+          </div>
+
+          <div class="section-header">
+            <div class="section-title">近期文章</div>
+            <div class="section-more">全部 →</div>
+          </div>
+
+          <div class="recent-articles">
+            <div class="profile-article">
+              <div class="profile-art-info">
+                <div class="profile-art-tag">🫁 常见病</div>
+                <div class="profile-art-title">发现肺结节别慌，这样判断要不要去医院</div>
+              </div>
+              <div class="profile-art-reads">1,204 👁</div>
+            </div>
+            <div class="profile-article">
+              <div class="profile-art-info">
+                <div class="profile-art-tag">❤️ 心身合一</div>
+                <div class="profile-art-title">血压高了就降压？你可能从未想过背后的原因</div>
+              </div>
+              <div class="profile-art-reads">2,841 👁</div>
+            </div>
+            <div class="profile-article">
+              <div class="profile-art-info">
+                <div class="profile-art-tag">🌱 生命成长</div>
+                <div class="profile-art-title">我的孩子10年从未用药，这是怎么做到的</div>
+              </div>
+              <div class="profile-art-reads">3,102 👁</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-nav">
+          <div class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-text">首页</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon">📚</div>
+            <div class="nav-text">分类</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon">🔖</div>
+            <div class="nav-text">收藏</div>
+          </div>
+          <div class="nav-item">
+            <div class="nav-icon active">👤</div>
+            <div class="nav-text active">我的</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 功能说明 -->
+<div class="desc-container">
+  <div class="desc-block">
+    <div class="desc-title">核心功能</div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">首页内容流 · 分类浏览 · 搜索功能</div></div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">文章详情 · 收藏 · 评论互动</div></div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">王医生个人主页 · IP展示</div></div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">后台管理 · 王老师自主上传内容</div></div>
+  </div>
+  <div class="desc-block">
+    <div class="desc-title">设计风格</div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">中式水墨 · 温润自然 · 有文化气质</div></div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">宋体衬线字体 · 传递专业与温度</div></div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">绿·金·暖白配色 · 贴合中医美学</div></div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">区别于丁香医生的冷白风格</div></div>
+  </div>
+  <div class="desc-block">
+    <div class="desc-title">交付内容</div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">微信小程序 · 前后端完整开发</div></div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">源码完整交付 · 永久使用权</div></div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">35天交付 · 1年售后保障</div></div>
+    <div class="desc-item"><div class="desc-dot"></div><div class="desc-text">后期可随时升级至方案二三</div></div>
+  </div>
+</div>
+
+<div class="price-tag">
+  <div class="price-label">方案一报价参考</div>
+  <div class="price-value">3 — 4 万</div>
+  <div class="price-sub">具体以技术评估为准 · 源码交付 · 一次性买断</div>
+</div>
+
+</body>
+</html>

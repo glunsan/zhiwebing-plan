@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>治未病 · 方案二 · 社区成长版</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1208;
+  --earth: #8B6914;
+  --moss: #4a6741;
+  --moss-deep: #2d4a28;
+  --mist: #f5f0e8;
+  --paper: #faf7f2;
+  --warm-white: #fffdf9;
+  --gold: #c9972a;
+  --gold-light: #e8b84b;
+  --sage: #7a9e72;
+  --cream: #e8dfc8;
+  --muted: #8a7860;
+  --rust: #a84e2a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #2c2416;
+  font-family: 'Noto Sans SC', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(201,151,42,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(74,103,65,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.page-eyebrow { color: rgba(255,255,255,0.35); font-size: 11px; letter-spacing: 5px; margin-bottom: 8px; }
+.page-title { font-family: 'Noto Serif SC', serif; color: var(--gold-light); font-size: 24px; font-weight: 700; letter-spacing: 2px; margin-bottom: 4px; }
+.page-subtitle { color: rgba(255,255,255,0.35); font-size: 12px; letter-spacing: 2px; margin-bottom: 12px; text-align: center; }
+.badge { display: inline-block; background: rgba(201,151,42,0.15); border: 1px solid rgba(201,151,42,0.3); color: var(--gold); font-size: 10px; padding: 4px 14px; border-radius: 12px; letter-spacing: 2px; margin-bottom: 48px; }
+.screens-row { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; max-width: 1300px; }
+.screen-col { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.screen-label { color: rgba(255,255,255,0.4); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
+.screen-tag { font-size: 9px; padding: 2px 9px; border-radius: 8px; letter-spacing: 2px; background: rgba(201,151,42,0.15); border: 1px solid rgba(201,151,42,0.3); color: var(--gold); }
+.phone {
+  width: 275px; height: 575px;
+  background: #0f0c08;
+  border-radius: 38px; padding: 11px;
+  box-shadow: 0 50px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.phone::before { content: ''; position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 72px; height: 22px; background: #0f0c08; border-radius: 0 0 12px 12px; z-index: 10; }
+.phone { position: relative; }
+.screen { width: 100%; height: 100%; border-radius: 28px; overflow: hidden; position: relative; background: var(--warm-white); }
+
+/* ===== 社区论坛 ===== */
+.community-header {
+  background: linear-gradient(160deg, #1a2e18 0%, #2d4a28 60%, #3d5e35 100%);
+  padding: 38px 18px 26px; position: relative; overflow: hidden;
+}
+.community-header::before { content: '共'; position: absolute; right: -8px; top: -18px; font-family: 'Noto Serif SC', serif; font-size: 110px; color: rgba(255,255,255,0.04); font-weight: 700; }
+.community-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 20px; background: var(--warm-white); border-radius: 20px 20px 0 0; }
+.ch-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.ch-logo { display: flex; align-items: center; gap: 8px; }
+.ch-logo-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.ch-logo-text { font-family: 'Noto Serif SC', serif; color: white; font-size: 15px; font-weight: 600; letter-spacing: 1px; }
+.ch-logo-sub { color: rgba(255,255,255,0.4); font-size: 9px; letter-spacing: 1px; }
+.ch-notify { width: 28px; height: 28px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; position: relative; }
+.ch-notify::after { content: ''; position: absolute; top: 5px; right: 5px; width: 6px; height: 6px; background: #c84a30; border-radius: 50%; border: 1px solid #1a2e18; }
+.ch-tagline { font-family: 'Noto Serif SC', serif; color: white; font-size: 17px; font-weight: 600; line-height: 1.5; margin-bottom: 14px; }
+.ch-tabs { display: flex; gap: 6px; }
+.ch-tab { padding: 5px 12px; border-radius: 14px; font-size: 11px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+.ch-tab.active { background: rgba(255,255,255,0.95); color: var(--moss); font-weight: 600; }
+.community-body { padding: 14px 14px 0; height: calc(100% - 172px); overflow-y: auto; }
+.post-card { background: white; border-radius: 14px; padding: 12px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.04); }
+.post-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.post-avatar { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-family: 'Noto Serif SC', serif; font-weight: 600; flex-shrink: 0; }
+.pa-moss { background: linear-gradient(135deg, #3d5c32, #6a9c5a); color: white; }
+.pa-gold { background: linear-gradient(135deg, #8B6914, #c9972a); color: white; }
+.pa-earth { background: linear-gradient(135deg, #7a4020, #a86040); color: white; }
+.post-username { font-size: 11px; font-weight: 600; color: var(--ink); }
+.post-meta { font-size: 9px; color: var(--muted); }
+.doctor-badge { background: linear-gradient(135deg, #2d4a28, #3d6035); color: #a0d490; font-size: 8px; padding: 2px 6px; border-radius: 6px; letter-spacing: 0.5px; margin-left: 4px; }
+.post-content { font-size: 12px; color: #3a2e1e; line-height: 1.7; margin-bottom: 8px; }
+.post-tag { display: inline-block; background: #eef5ec; color: var(--sage); font-size: 9px; padding: 2px 7px; border-radius: 7px; margin-right: 4px; margin-bottom: 6px; }
+.post-actions { display: flex; gap: 14px; align-items: center; padding-top: 6px; border-top: 1px solid #f5f0e8; }
+.post-action-btn { font-size: 10px; color: var(--muted); display: flex; align-items: center; gap: 3px; }
+.post-action-btn.liked { color: #c84a30; }
+.write-btn { position: absolute; bottom: 64px; right: 14px; width: 40px; height: 40px; background: linear-gradient(135deg, var(--moss), var(--sage)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 12px rgba(74,103,65,0.4); color: white; }
+
+/* ===== 会员中心 ===== */
+.member-header {
+  background: linear-gradient(160deg, #1a1208 0%, #2e1e08 60%, #3e2c14 100%);
+  padding: 38px 18px 26px; position: relative; overflow: hidden;
+}
+.member-header::before { content: '会'; position: absolute; right: -5px; top: -15px; font-family: 'Noto Serif SC', serif; font-size: 110px; color: rgba(255,255,255,0.04); font-weight: 700; }
+.member-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 20px; background: var(--paper); border-radius: 20px 20px 0 0; }
+.member-screen { background: var(--paper); }
+.mh-user { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.mh-avatar { width: 46px; height: 46px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif SC', serif; color: white; font-size: 18px; font-weight: 700; border: 2px solid rgba(255,255,255,0.15); }
+.mh-name { font-family: 'Noto Serif SC', serif; color: white; font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.mh-level { display: inline-flex; align-items: center; gap: 4px; background: rgba(201,151,42,0.25); border: 1px solid rgba(201,151,42,0.4); color: var(--gold-light); font-size: 9px; padding: 2px 8px; border-radius: 8px; letter-spacing: 1px; }
+.member-card { background: linear-gradient(135deg, rgba(201,151,42,0.15), rgba(232,184,75,0.08)); border: 1px solid rgba(201,151,42,0.25); border-radius: 14px; padding: 14px; position: relative; overflow: hidden; }
+.member-card::before { content: '☯'; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 52px; color: rgba(201,151,42,0.08); }
+.mc-title { color: var(--gold-light); font-size: 10px; letter-spacing: 2px; margin-bottom: 6px; }
+.mc-name { font-family: 'Noto Serif SC', serif; color: white; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.mc-expire { color: rgba(255,255,255,0.4); font-size: 10px; }
+.member-body { padding: 14px; overflow-y: auto; height: calc(100% - 205px); }
+.plan-section { margin-bottom: 14px; }
+.plan-title { font-family: 'Noto Serif SC', serif; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+.plan-title::before { content: ''; display: inline-block; width: 3px; height: 13px; background: var(--gold); border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.plan-cards { display: flex; gap: 8px; }
+.plan-card { flex: 1; border-radius: 12px; padding: 12px 8px; text-align: center; position: relative; border: 1px solid transparent; }
+.plan-card.free { background: #f5f0e4; border-color: #e8dcc8; }
+.plan-card.vip { background: linear-gradient(135deg, #1a2e18, #243e22); border-color: rgba(122,158,114,0.3); }
+.plan-card.vip-plus { background: linear-gradient(135deg, #2e1e08, #3e2c14); border-color: rgba(201,151,42,0.3); }
+.plan-badge { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--gold); color: white; font-size: 8px; padding: 1px 8px; border-radius: 8px; white-space: nowrap; letter-spacing: 0.5px; }
+.plan-icon { font-size: 18px; margin-bottom: 5px; }
+.plan-name { font-size: 10px; font-weight: 600; margin-bottom: 4px; }
+.plan-card.free .plan-name { color: var(--muted); }
+.plan-card.vip .plan-name { color: #a0d490; }
+.plan-card.vip-plus .plan-name { color: var(--gold-light); }
+.plan-price { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+.plan-card.free .plan-price { color: var(--muted); }
+.plan-card.vip .plan-price { color: white; }
+.plan-card.vip-plus .plan-price { color: var(--gold-light); }
+.plan-period { font-size: 9px; opacity: 0.5; margin-bottom: 8px; color: inherit; }
+.plan-btn { padding: 5px 0; border-radius: 8px; font-size: 10px; width: 100%; text-align: center; }
+.plan-card.free .plan-btn { background: #e8dcc8; color: var(--muted); }
+.plan-card.vip .plan-btn { background: var(--sage); color: white; }
+.plan-card.vip-plus .plan-btn { background: var(--gold); color: white; }
+.perks-list { margin-bottom: 10px; }
+.perk-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f0ebe0; }
+.perk-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.pi-moss { background: #e4f0e0; }
+.pi-gold { background: #f5e8d0; }
+.perk-name { font-size: 11px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+.perk-desc { font-size: 9px; color: var(--muted); }
+.perk-tag { margin-left: auto; font-size: 9px; padding: 2px 7px; border-radius: 7px; flex-shrink: 0; }
+.pt-free { background: #f0ebe0; color: var(--muted); }
+.pt-vip { background: #e4f0e0; color: var(--moss); }
+.pt-plus { background: #f5e8d0; color: var(--earth); }
+
+/* ===== 医生入驻 ===== */
+.doctor-screen { background: var(--warm-white); }
+.doctor-header {
+  background: linear-gradient(160deg, #1a2e18 0%, #2d4a28 60%, #3d5e35 100%);
+  padding: 38px 18px 24px; position: relative; overflow: hidden;
+}
+.doctor-header::before { content: '医'; position: absolute; right: -5px; top: -15px; font-family: 'Noto Serif SC', serif; font-size: 110px; color: rgba(255,255,255,0.04); font-weight: 700; }
+.doctor-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 20px; background: var(--warm-white); border-radius: 20px 20px 0 0; }
+.dh-title { font-family: 'Noto Serif SC', serif; color: white; font-size: 18px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+.dh-sub { color: rgba(255,255,255,0.4); font-size: 11px; letter-spacing: 1px; margin-bottom: 14px; }
+.dh-stats { display: flex; gap: 20px; }
+.dh-stat { text-align: center; }
+.dh-num { font-family: 'Noto Serif SC', serif; color: white; font-size: 18px; font-weight: 700; }
+.dh-label { color: rgba(255,255,255,0.35); font-size: 9px; margin-top: 1px; letter-spacing: 0.5px; }
+.doctor-body { padding: 14px; overflow-y: auto; height: calc(100% - 162px); }
+.featured-doc { background: linear-gradient(135deg, #1a2e18, #243e22); border: 1px solid rgba(122,158,114,0.2); border-radius: 14px; padding: 14px; margin-bottom: 12px; display: flex; gap: 12px; align-items: center; position: relative; overflow: hidden; }
+.featured-doc::before { content: '⭐ 创始医生'; position: absolute; top: 10px; right: 10px; background: rgba(201,151,42,0.25); border: 1px solid rgba(201,151,42,0.4); color: var(--gold-light); font-size: 8px; padding: 2px 7px; border-radius: 8px; letter-spacing: 1px; }
+.fd-avatar { width: 52px; height: 52px; background: linear-gradient(135deg, #3d5c32, #6a9c5a); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif SC', serif; color: white; font-size: 20px; font-weight: 700; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.1); }
+.fd-name { font-family: 'Noto Serif SC', serif; color: white; font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.fd-title-text { color: rgba(255,255,255,0.45); font-size: 10px; margin-bottom: 6px; line-height: 1.4; }
+.fd-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.fd-tag { background: rgba(122,158,114,0.2); color: #a0d490; font-size: 9px; padding: 2px 6px; border-radius: 6px; }
+.doc-section-title { font-family: 'Noto Serif SC', serif; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 10px; margin-top: 4px; }
+.doc-section-title::before { content: ''; display: inline-block; width: 3px; height: 13px; background: var(--gold); border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.doc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.doc-card { background: white; border-radius: 12px; padding: 12px 10px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.04); }
+.doc-card-avatar { width: 40px; height: 40px; border-radius: 50%; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-family: 'Noto Serif SC', serif; font-weight: 600; color: white; }
+.dca-1 { background: linear-gradient(135deg, #3d5c32, #6a9c5a); }
+.dca-2 { background: linear-gradient(135deg, #8B6914, #c9972a); }
+.dca-3 { background: linear-gradient(135deg, #2d4a28, #4a7040); }
+.dca-4 { background: linear-gradient(135deg, #7a4020, #a86040); }
+.doc-card-name { font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.doc-card-spec { font-size: 9px; color: var(--muted); margin-bottom: 6px; }
+.doc-card-btn { background: #f0ebe0; color: var(--muted); font-size: 9px; padding: 4px 8px; border-radius: 8px; }
+.join-banner { background: linear-gradient(135deg, #1a2e18, #243e22); border: 1px solid rgba(122,158,114,0.2); border-radius: 14px; padding: 14px; text-align: center; }
+.jb-icon { font-size: 22px; margin-bottom: 7px; }
+.jb-title { font-family: 'Noto Serif SC', serif; color: white; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.jb-desc { color: rgba(255,255,255,0.4); font-size: 10px; margin-bottom: 10px; line-height: 1.5; }
+.jb-btn { background: linear-gradient(135deg, var(--moss), var(--sage)); color: white; font-size: 11px; padding: 8px 20px; border-radius: 20px; display: inline-block; }
+
+/* ===== 专题合集 ===== */
+.topic-screen { background: var(--paper); }
+.topic-header {
+  background: linear-gradient(160deg, #1a1208 0%, #2e1e08 60%, #3e2c14 100%);
+  padding: 38px 18px 24px; position: relative; overflow: hidden;
+}
+.topic-header::before { content: '专'; position: absolute; right: -5px; top: -15px; font-family: 'Noto Serif SC', serif; font-size: 110px; color: rgba(255,255,255,0.04); font-weight: 700; }
+.topic-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 20px; background: var(--paper); border-radius: 20px 20px 0 0; }
+.th-label { color: rgba(255,255,255,0.4); font-size: 10px; letter-spacing: 2px; margin-bottom: 6px; }
+.th-title { font-family: 'Noto Serif SC', serif; color: white; font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; }
+.th-meta { display: flex; gap: 12px; align-items: center; }
+.th-count { color: rgba(255,255,255,0.4); font-size: 10px; white-space: nowrap; }
+.th-progress { flex: 1; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+.th-progress-fill { width: 60%; height: 100%; background: linear-gradient(90deg, var(--sage), var(--gold-light)); border-radius: 2px; }
+.topic-body { padding: 14px; overflow-y: auto; height: calc(100% - 155px); }
+.topic-intro { background: white; border-radius: 12px; padding: 12px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.ti-text { font-size: 11px; color: #5a4a2e; line-height: 1.8; }
+.series-item { background: white; border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.04); }
+.si-num { width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; font-family: 'Noto Serif SC', serif; }
+.sn-done { background: #e4f0e0; color: var(--moss); }
+.sn-current { background: var(--moss); color: white; }
+.sn-lock { background: #f0ebe0; color: var(--muted); }
+.si-info { flex: 1; }
+.si-title { font-size: 12px; color: var(--ink); font-family: 'Noto Serif SC', serif; margin-bottom: 2px; }
+.si-meta { font-size: 9px; color: var(--muted); }
+.si-status { font-size: 12px; flex-shrink: 0; }
+
+/* ===== 底部导航 ===== */
+.bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 56px; background: white; border-top: 1px solid #f0ebe0; display: flex; align-items: center; justify-content: space-around; padding: 0 8px; border-radius: 0 0 28px 28px; }
+.nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.nav-icon { font-size: 17px; }
+.nav-text { font-size: 9px; color: #b0a080; }
+.nav-text.active { color: var(--moss); font-weight: 600; }
+
+/* ===== 底部说明 ===== */
+.info-section { margin-top: 50px; max-width: 1200px; width: 100%; }
+.info-title { text-align: center; font-family: 'Noto Serif SC', serif; color: rgba(255,255,255,0.4); font-size: 12px; letter-spacing: 4px; margin-bottom: 24px; }
+.info-grid { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.info-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 18px; width: 250px; }
+.ic-title { font-size: 11px; letter-spacing: 2px; color: var(--gold); margin-bottom: 10px; }
+.ic-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 7px; }
+.ic-dot { width: 5px; height: 5px; background: var(--sage); border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.ic-text { color: rgba(255,255,255,0.55); font-size: 12px; line-height: 1.5; }
+.price-area { margin-top: 36px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.price-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 18px 36px; text-align: center; }
+.price-card.highlight { border-color: rgba(201,151,42,0.3); background: rgba(201,151,42,0.05); }
+.pc-label { color: rgba(255,255,255,0.3); font-size: 10px; letter-spacing: 3px; margin-bottom: 6px; }
+.pc-value { font-family: 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+.price-card .pc-value { color: rgba(255,255,255,0.4); }
+.price-card.highlight .pc-value { color: var(--gold-light); }
+.pc-sub { color: rgba(255,255,255,0.25); font-size: 10px; letter-spacing: 1px; }
+.plus-sign { color: rgba(255,255,255,0.2); font-size: 20px; }
+</style>
+</head>
+<body>
+<div class="page-eyebrow">治未病 · 懂生命</div>
+<div class="page-title">方案二 · 社区成长版</div>
+<div class="page-subtitle">在方案一基础上新增 · 论坛社区 · 会员体系 · 医生入驻 · 专题合集</div>
+<div class="badge">NEW FEATURES</div>
+
+<div class="screens-row">
+  <!-- 社区论坛 -->
+  <div class="screen-col">
+    <div class="screen-label">社区论坛</div>
+    <div class="screen-tag">NEW</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="community-header">
+          <div class="ch-top">
+            <div class="ch-logo">
+              <div class="ch-logo-icon">☯</div>
+              <div><div class="ch-logo-text">治未病社区</div><div class="ch-logo-sub">懂生命 · 共成长</div></div>
+            </div>
+            <div class="ch-notify">🔔</div>
+          </div>
+          <div class="ch-tagline">每个人都是<br>自己的医生</div>
+          <div class="ch-tabs">
+            <div class="ch-tab active">推荐</div>
+            <div class="ch-tab">关注</div>
+            <div class="ch-tab">中医之道</div>
+            <div class="ch-tab">经验分享</div>
+          </div>
+        </div>
+        <div class="community-body">
+          <div class="post-card">
+            <div class="post-header">
+              <div class="post-avatar pa-moss">王</div>
+              <div><div class="post-username">王誉瑾医生<span class="doctor-badge">认证医生</span></div><div class="post-meta">3小时前 · 心身合一</div></div>
+            </div>
+            <div class="post-content">高血压患者，光降压是不够的。很多人忽略了情绪与血压的关系。我见过太多人，压力一大血压就飙升，药量越来越大，根本问题没解决…</div>
+            <div><span class="post-tag">#高血压</span><span class="post-tag">#心身合一</span></div>
+            <div class="post-actions"><div class="post-action-btn liked">❤️ 128</div><div class="post-action-btn">💬 34</div><div class="post-action-btn">📤 分享</div></div>
+          </div>
+          <div class="post-card">
+            <div class="post-header">
+              <div class="post-avatar pa-gold">李</div>
+              <div><div class="post-username">李阿姨的康复日记</div><div class="post-meta">昨天 · 生命成长</div></div>
+            </div>
+            <div class="post-content">在这里学了三个月，终于明白我妈的糖尿病为什么越来越严重了。饮食只是一方面，睡眠和情绪才是根本…</div>
+            <div><span class="post-tag">#糖尿病</span><span class="post-tag">#家人康复</span></div>
+            <div class="post-actions"><div class="post-action-btn">❤️ 64</div><div class="post-action-btn">💬 18</div><div class="post-action-btn">📤 分享</div></div>
+          </div>
+          <div class="post-card">
+            <div class="post-header">
+              <div class="post-avatar pa-earth">陈</div>
+              <div><div class="post-username">陈医生<span class="doctor-badge">认证医生</span></div><div class="post-meta">2天前 · 育儿健康</div></div>
+            </div>
+            <div class="post-content">秋冬换季，孩子咳嗽先别急着喂消炎药。寒咳和热咳调理方法完全不同，先判断再处理…</div>
+            <div><span class="post-tag">#育儿</span><span class="post-tag">#咳嗽</span></div>
+            <div class="post-actions"><div class="post-action-btn">❤️ 201</div><div class="post-action-btn">💬 55</div><div class="post-action-btn">📤 分享</div></div>
+          </div>
+        </div>
+        <div class="write-btn">✏️</div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-text">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-text active">社区</div></div>
+          <div class="nav-item"><div class="nav-icon">📚</div><div class="nav-text">分类</div></div>
+          <div class="nav-item"><div class="nav-icon">🔖</div><div class="nav-text">收藏</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-text">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 会员中心 -->
+  <div class="screen-col">
+    <div class="screen-label">会员中心</div>
+    <div class="screen-tag">NEW</div>
+    <div class="phone">
+      <div class="screen member-screen">
+        <div class="member-header">
+          <div class="mh-user">
+            <div class="mh-avatar">张</div>
+            <div><div class="mh-name">张先生</div><div class="mh-level">🌿 成长会员</div></div>
+          </div>
+          <div class="member-card">
+            <div class="mc-title">当前会员</div>
+            <div class="mc-name">成长会员 · 年卡</div>
+            <div class="mc-expire">有效期至 2026年12月31日</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="plan-section">
+            <div class="plan-title">选择方案</div>
+            <div class="plan-cards">
+              <div class="plan-card free"><div class="plan-icon">🌱</div><div class="plan-name">免费版</div><div class="plan-price">¥0</div><div class="plan-period">永久</div><div class="plan-btn">当前</div></div>
+              <div class="plan-card vip" style="position:relative;"><div class="plan-badge">推荐</div><div class="plan-icon">🌿</div><div class="plan-name">成长会员</div><div class="plan-price">¥98</div><div class="plan-period">/ 年</div><div class="plan-btn">开通</div></div>
+              <div class="plan-card vip-plus"><div class="plan-icon">☯</div><div class="plan-name">传道会员</div><div class="plan-price">¥298</div><div class="plan-period">/ 年</div><div class="plan-btn">开通</div></div>
+            </div>
+          </div>
+          <div class="perks-list">
+            <div class="plan-title">会员权益</div>
+            <div class="perk-item"><div class="perk-icon pi-moss">📖</div><div><div class="perk-name">全部文章无限阅读</div><div class="perk-desc">含专题合集 · 深度内容</div></div><div class="perk-tag pt-vip">成长+</div></div>
+            <div class="perk-item"><div class="perk-icon pi-gold">👩‍⚕️</div><div><div class="perk-name">医生专属内容</div><div class="perk-desc">认证医生深度解析</div></div><div class="perk-tag pt-vip">成长+</div></div>
+            <div class="perk-item"><div class="perk-icon pi-moss">💬</div><div><div class="perk-name">社区发帖互动</div><div class="perk-desc">与同路人共同探讨</div></div><div class="perk-tag pt-free">免费</div></div>
+            <div class="perk-item"><div class="perk-icon pi-gold">🎯</div><div><div class="perk-name">专题系列全集</div><div class="perk-desc">高血压·糖尿病·肺结节</div></div><div class="perk-tag pt-plus">传道</div></div>
+            <div class="perk-item"><div class="perk-icon pi-moss">📝</div><div><div class="perk-name">王医生优先回复</div><div class="perk-desc">留言优先获得回复</div></div><div class="perk-tag pt-plus">传道</div></div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-text">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-text">社区</div></div>
+          <div class="nav-item"><div class="nav-icon">📚</div><div class="nav-text">分类</div></div>
+          <div class="nav-item"><div class="nav-icon">🔖</div><div class="nav-text">收藏</div></div>
+          <div class="nav-item"><div class="nav-icon active">👤</div><div class="nav-text active">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 医生入驻 -->
+  <div class="screen-col">
+    <div class="screen-label">医生入驻</div>
+    <div class="screen-tag">NEW</div>
+    <div class="phone">
+      <div class="screen doctor-screen">
+        <div class="doctor-header">
+          <div class="dh-title">医生团队</div>
+          <div class="dh-sub">与专业同行，探索生命之道</div>
+          <div class="dh-stats">
+            <div class="dh-stat"><div class="dh-num">12</div><div class="dh-label">认证医生</div></div>
+            <div class="dh-stat"><div class="dh-num">8</div><div class="dh-label">专业方向</div></div>
+            <div class="dh-stat"><div class="dh-num">2,400+</div><div class="dh-label">内容篇数</div></div>
+          </div>
+        </div>
+        <div class="doctor-body">
+          <div class="featured-doc">
+            <div class="fd-avatar">王</div>
+            <div><div class="fd-name">王誉瑾</div><div class="fd-title-text">医学博士 · 中西医结合<br>科研管理与设计</div><div class="fd-tags"><span class="fd-tag">治未病</span><span class="fd-tag">心身合一</span><span class="fd-tag">全科</span></div></div>
+          </div>
+          <div class="doc-section-title">更多认证医生</div>
+          <div class="doc-grid">
+            <div class="doc-card"><div class="doc-card-avatar dca-1">陈</div><div class="doc-card-name">陈医生</div><div class="doc-card-spec">儿科 · 治未病</div><div class="doc-card-btn">查看主页</div></div>
+            <div class="doc-card"><div class="doc-card-avatar dca-2">林</div><div class="doc-card-name">林医生</div><div class="doc-card-spec">中医 · 针灸</div><div class="doc-card-btn">查看主页</div></div>
+            <div class="doc-card"><div class="doc-card-avatar dca-3">张</div><div class="doc-card-name">张医生</div><div class="doc-card-spec">心理 · 身心</div><div class="doc-card-btn">查看主页</div></div>
+            <div class="doc-card"><div class="doc-card-avatar dca-4">吴</div><div class="doc-card-name">吴医生</div><div class="doc-card-spec">老年 · 慢病</div><div class="doc-card-btn">查看主页</div></div>
+          </div>
+          <div class="join-banner">
+            <div class="jb-icon">🌿</div>
+            <div class="jb-title">您也是医生？</div>
+            <div class="jb-desc">诚邀有理念的医生朋友加入，传递真实的健康智慧</div>
+            <div class="jb-btn">申请入驻</div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-text">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-text">社区</div></div>
+          <div class="nav-item"><div class="nav-icon active">📚</div><div class="nav-text active">分类</div></div>
+          <div class="nav-item"><div class="nav-icon">🔖</div><div class="nav-text">收藏</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-text">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 专题合集 -->
+  <div class="screen-col">
+    <div class="screen-label">专题合集</div>
+    <div class="screen-tag">NEW</div>
+    <div class="phone">
+      <div class="screen topic-screen">
+        <div class="topic-header">
+          <div class="th-label">专题系列</div>
+          <div class="th-title">高血压的真相<br>从根本认识它</div>
+          <div class="th-meta"><div class="th-count">共8篇 · 已读5篇</div><div class="th-progress"><div class="th-progress-fill"></div></div></div>
+        </div>
+        <div class="topic-body">
+          <div class="topic-intro"><div class="ti-text">王医生用8篇文章，带你从中西医两个视角，真正理解高血压的成因、危害和调理之道。</div></div>
+          <div class="series-item"><div class="si-num sn-done">1</div><div class="si-info"><div class="si-title">血压高了就降压？背后原因你想过吗</div><div class="si-meta">3,201次阅读 · 已读</div></div><div class="si-status">✅</div></div>
+          <div class="series-item"><div class="si-num sn-done">2</div><div class="si-info"><div class="si-title">情绪与血压的隐秘关系</div><div class="si-meta">2,408次阅读 · 已读</div></div><div class="si-status">✅</div></div>
+          <div class="series-item"><div class="si-num sn-done">3</div><div class="si-info"><div class="si-title">中医如何看待高血压</div><div class="si-meta">1,890次阅读 · 已读</div></div><div class="si-status">✅</div></div>
+          <div class="series-item" style="border:1px solid rgba(74,103,65,0.3);background:#f0f7ee;"><div class="si-num sn-current">4</div><div class="si-info"><div class="si-title">饮食调理的真正逻辑</div><div class="si-meta">正在阅读</div></div><div class="si-status">▶️</div></div>
+          <div class="series-item"><div class="si-num sn-done">5</div><div class="si-info"><div class="si-title">运动与血压的正确关系</div><div class="si-meta">1,102次阅读</div></div><div class="si-status">✅</div></div>
+          <div class="series-item" style="opacity:0.5;"><div class="si-num sn-lock">6</div><div class="si-info"><div class="si-title">长期用药的风险你知道吗</div><div class="si-meta">会员专属内容</div></div><div class="si-status">🔒</div></div>
+          <div class="series-item" style="opacity:0.5;"><div class="si-num sn-lock">7</div><div class="si-info"><div class="si-title">脑梗心梗的预防关键</div><div class="si-meta">会员专属内容</div></div><div class="si-status">🔒</div></div>
+          <div class="series-item" style="opacity:0.5;"><div class="si-num sn-lock">8</div><div class="si-info"><div class="si-title">王医生的完整调理方案</div><div class="si-meta">传道会员专属</div></div><div class="si-status">🔒</div></div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-text">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-text">社区</div></div>
+          <div class="nav-item"><div class="nav-icon active">📚</div><div class="nav-text active">分类</div></div>
+          <div class="nav-item"><div class="nav-icon">🔖</div><div class="nav-text">收藏</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-text">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="info-section">
+  <div class="info-title">方案二 · 新增功能</div>
+  <div class="info-grid">
+    <div class="info-card"><div class="ic-title">社区论坛</div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">用户发帖分享健康经验</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">认证医生发布专业内容</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">话题分类 · 点赞评论互动</div></div></div>
+    <div class="info-card"><div class="ic-title">会员体系</div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">三级会员：免费/成长/传道</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">会员专属深度内容解锁</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">平台自我造血 · 可持续运营</div></div></div>
+    <div class="info-card"><div class="ic-title">医生入驻</div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">认证医生主页与内容展示</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">医生申请入驻后台审核</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">多医生协作扩大内容量</div></div></div>
+    <div class="info-card"><div class="ic-title">专题合集</div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">系列化专题：高血压/糖尿病等</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">阅读进度追踪</div></div><div class="ic-item"><div class="ic-dot"></div><div class="ic-text">会员内容分级解锁</div></div></div>
+  </div>
+  <div class="price-area">
+    <div class="price-card"><div class="pc-label">方案一基础</div><div class="pc-value">3—4万</div><div class="pc-sub">轻量起步版</div></div>
+    <div class="plus-sign">+</div>
+    <div class="price-card highlight"><div class="pc-label">方案二报价</div><div class="pc-value">6—8万</div><div class="pc-sub">含方案一全部功能 · 50天交付</div></div>
+  </div>
+</div>
+</body>
+</html>
