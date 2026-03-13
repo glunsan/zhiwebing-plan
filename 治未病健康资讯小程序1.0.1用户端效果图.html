@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>治未病健康资讯小程序 · 1.0.1版 · 用户端效果图</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9972a; --gold-light: #e8b84b; --gold-dim: #a07820;
+  --moss: #4a6741; --moss-deep: #2d4a28; --sage: #7a9e72;
+  --ink: #1a1208; --muted: #8a7860; --paper: #faf7f2;
+  --warm: #fffdf9; --cream: #f5f0e8; --border: #e8e0d0;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: #211a10;
+  font-family: 'Noto Sans SC', sans-serif;
+  padding: 40px 20px 80px;
+  display: flex; flex-direction: column; align-items: center;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background: radial-gradient(ellipse at 20% 20%, rgba(201,151,42,0.06) 0%, transparent 55%),
+              radial-gradient(ellipse at 80% 80%, rgba(74,103,65,0.06) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* ===== 页标题 ===== */
+.page-header { text-align: center; margin-bottom: 60px; }
+.ph-eyebrow { color: rgba(255,255,255,0.3); font-size: 10px; letter-spacing: 5px; margin-bottom: 10px; }
+.ph-title { font-family: 'Noto Serif SC', serif; color: var(--gold-light); font-size: 22px; font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; }
+.ph-sub { color: rgba(255,255,255,0.3); font-size: 12px; letter-spacing: 2px; margin-bottom: 16px; }
+.ph-badge { display: inline-block; background: rgba(201,151,42,0.12); border: 1px solid rgba(201,151,42,0.25); color: var(--gold); font-size: 10px; padding: 4px 16px; border-radius: 12px; letter-spacing: 2px; }
+
+/* ===== 区块标题 ===== */
+.section-title { color: rgba(255,255,255,0.25); font-size: 10px; letter-spacing: 5px; text-align: center; margin: 64px 0 28px; text-transform: uppercase; }
+.section-title::before, .section-title::after { content: '──'; margin: 0 12px; }
+
+/* ===== 手机框 ===== */
+.phones-row { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; max-width: 1400px; }
+.phone-col { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.phone-label { color: rgba(255,255,255,0.35); font-size: 10px; letter-spacing: 3px; }
+.phone {
+  width: 270px; height: 570px; background: #0d0a06;
+  border-radius: 40px; padding: 11px;
+  box-shadow: 0 48px 96px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+}
+.phone::before {
+  content: ''; position: absolute; top: 11px; left: 50%; transform: translateX(-50%);
+  width: 68px; height: 20px; background: #0d0a06; border-radius: 0 0 12px 12px; z-index: 10;
+}
+.screen { width: 100%; height: 100%; border-radius: 30px; overflow: hidden; position: relative; background: var(--warm); }
+
+/* ===== 通用组件 ===== */
+.status-bar { height: 32px; display: flex; align-items: flex-end; justify-content: space-between; padding: 0 16px 6px; font-size: 9px; }
+.bottom-nav {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 54px;
+  background: white; border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-around;
+  border-radius: 0 0 30px 30px; padding: 0 6px;
+}
+.nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.nav-icon { font-size: 18px; line-height: 1; }
+.nav-txt { font-size: 9px; color: #b0a080; }
+.nav-txt.on { color: var(--moss); font-weight: 600; }
+
+/* ===== 1. 登录页 ===== */
+.login-screen { background: linear-gradient(160deg, #1a2e18 0%, #2d4a28 50%, #1a1208 100%); }
+.login-bg-char { position: absolute; font-family: 'Noto Serif SC', serif; font-size: 180px; font-weight: 700; color: rgba(255,255,255,0.03); right: -20px; top: 20px; }
+.login-top { padding: 48px 24px 0; position: relative; }
+.login-logo { width: 52px; height: 52px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(201,151,42,0.3); }
+.login-name { font-family: 'Noto Serif SC', serif; color: white; font-size: 22px; font-weight: 700; letter-spacing: 2px; margin-bottom: 4px; }
+.login-sub { color: rgba(255,255,255,0.4); font-size: 11px; letter-spacing: 2px; }
+.login-card { position: absolute; bottom: 0; left: 0; right: 0; background: var(--warm); border-radius: 24px 24px 0 0; padding: 28px 22px 20px; }
+.login-tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
+.login-tab { flex: 1; text-align: center; padding-bottom: 10px; font-size: 13px; color: var(--muted); }
+.login-tab.on { color: var(--moss); font-weight: 600; border-bottom: 2px solid var(--moss); margin-bottom: -1px; }
+.inp-group { margin-bottom: 14px; }
+.inp-label { font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-bottom: 6px; }
+.inp-box { background: var(--cream); border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px; font-size: 12px; color: var(--ink); display: flex; align-items: center; justify-content: space-between; }
+.inp-placeholder { color: #c0b090; }
+.inp-action { font-size: 10px; color: var(--moss); }
+.login-btn { width: 100%; background: linear-gradient(135deg, var(--moss-deep), var(--moss)); color: white; font-size: 13px; font-weight: 600; padding: 13px; border-radius: 12px; text-align: center; margin-bottom: 16px; letter-spacing: 1px; box-shadow: 0 4px 14px rgba(74,103,65,0.3); }
+.login-divider { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-txt { font-size: 10px; color: var(--muted); }
+.wechat-btn { width: 100%; border: 1px solid #07c160; border-radius: 12px; padding: 11px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: #07c160; font-weight: 500; }
+.login-agreement { font-size: 9px; color: var(--muted); text-align: center; margin-top: 12px; line-height: 1.6; }
+.login-agreement span { color: var(--moss); }
+
+/* ===== 2. 首页 ===== */
+.home-header { background: linear-gradient(160deg, #1a2e18 0%, #2d4a28 60%, #3a5432 100%); padding: 36px 16px 20px; position: relative; overflow: hidden; }
+.home-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 18px; background: var(--cream); border-radius: 18px 18px 0 0; }
+.hh-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.hh-loc { display: flex; align-items: center; gap: 4px; color: rgba(255,255,255,0.7); font-size: 11px; }
+.hh-icons { display: flex; gap: 10px; font-size: 16px; }
+.hh-notify { position: relative; }
+.hh-dot { position: absolute; top: -2px; right: -2px; width: 6px; height: 6px; background: #e04040; border-radius: 50%; border: 1px solid #2d4a28; }
+.hh-search { background: rgba(255,255,255,0.12); border-radius: 20px; padding: 8px 14px; display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,0.45); margin-bottom: 12px; }
+.hh-banner { background: linear-gradient(135deg, rgba(201,151,42,0.2), rgba(201,151,42,0.08)); border: 1px solid rgba(201,151,42,0.2); border-radius: 12px; padding: 10px 14px; display: flex; align-items: center; gap: 10px; }
+.hh-banner-icon { font-size: 20px; }
+.hh-banner-text { font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+.hh-banner-text strong { color: var(--gold-light); display: block; font-size: 12px; }
+.home-body { background: var(--cream); height: calc(100% - 188px); overflow-y: auto; }
+.home-carousel { height: 110px; background: linear-gradient(135deg, #1a2e18, #3d6035); margin: 0; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.carousel-content { text-align: center; }
+.carousel-tag { background: rgba(201,151,42,0.2); border: 1px solid rgba(201,151,42,0.3); color: var(--gold-light); font-size: 9px; padding: 2px 8px; border-radius: 8px; letter-spacing: 1px; margin-bottom: 6px; display: inline-block; }
+.carousel-title { font-family: 'Noto Serif SC', serif; color: white; font-size: 14px; font-weight: 600; }
+.carousel-dots { display: flex; gap: 4px; justify-content: center; margin-top: 8px; }
+.cdot { width: 16px; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.25); }
+.cdot.on { background: var(--gold-light); width: 22px; }
+.home-section { padding: 14px 14px 0; }
+.hs-title { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.hs-title::before { content: ''; width: 3px; height: 14px; background: var(--gold); border-radius: 2px; display: inline-block; }
+.hs-more { margin-left: auto; font-size: 10px; color: var(--muted); }
+.notice-bar { background: #fff8ec; border: 1px solid #f0e0b0; border-radius: 10px; padding: 8px 12px; display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.notice-icon { font-size: 13px; }
+.notice-text { font-size: 10px; color: #8a6020; flex: 1; }
+
+/* ===== 3. 论坛页 ===== */
+.forum-header { background: linear-gradient(160deg, #1a2e18, #2d4a28, #3d5e35); padding: 36px 14px 16px; position: relative; overflow: hidden; }
+.forum-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 16px; background: var(--warm); border-radius: 16px 16px 0 0; }
+.fh-title { font-family: 'Noto Serif SC', serif; color: white; font-size: 17px; font-weight: 700; letter-spacing: 1px; margin-bottom: 12px; }
+.fh-tabs { display: flex; gap: 6px; overflow-x: auto; }
+.fh-tab { padding: 5px 12px; border-radius: 14px; font-size: 11px; white-space: nowrap; flex-shrink: 0; }
+.fh-tab.on { background: rgba(255,255,255,0.95); color: var(--moss); font-weight: 600; }
+.fh-tab.off { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.55); }
+.forum-body { height: calc(100% - 148px); overflow-y: auto; background: var(--warm); padding: 12px 14px 0; }
+.post-card { background: white; border-radius: 14px; padding: 12px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.04); }
+.post-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.post-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-family: 'Noto Serif SC', serif; font-weight: 600; color: white; flex-shrink: 0; }
+.pa-g { background: linear-gradient(135deg, #3d5c32, #6a9c5a); }
+.pa-b { background: linear-gradient(135deg, #8B6914, #c9972a); }
+.pa-r { background: linear-gradient(135deg, #7a4020, #a86040); }
+.pa-t { background: linear-gradient(135deg, #2d4a28, #4a7040); }
+.post-uname { font-size: 11px; font-weight: 600; color: var(--ink); }
+.post-meta { font-size: 9px; color: var(--muted); margin-top: 1px; }
+.post-tag { background: #e8f2e4; color: var(--moss); font-size: 9px; padding: 2px 7px; border-radius: 7px; margin-left: auto; flex-shrink: 0; }
+.post-content { font-size: 11px; color: #3a2e1e; line-height: 1.75; margin-bottom: 8px; }
+.post-img-row { display: flex; gap: 4px; margin-bottom: 8px; }
+.post-img { width: 64px; height: 48px; border-radius: 7px; background: var(--cream); display: flex; align-items: center; justify-content: center; font-size: 18px; border: 1px solid var(--border); }
+.post-loc { font-size: 9px; color: var(--muted); margin-bottom: 7px; }
+.post-actions { display: flex; gap: 14px; padding-top: 7px; border-top: 1px solid var(--cream); }
+.post-act { font-size: 10px; color: var(--muted); display: flex; align-items: center; gap: 3px; }
+.post-act.red { color: #c84a30; }
+.fab-btn { position: absolute; bottom: 66px; right: 14px; width: 42px; height: 42px; background: linear-gradient(135deg, var(--moss), var(--sage)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; box-shadow: 0 4px 14px rgba(74,103,65,0.4); }
+
+/* ===== 4. 资讯页 ===== */
+.news-header { background: linear-gradient(160deg, #1a1208, #2e1e08, #3e2c14); padding: 36px 14px 16px; position: relative; overflow: hidden; }
+.news-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 16px; background: var(--paper); border-radius: 16px 16px 0 0; }
+.nh-title { font-family: 'Noto Serif SC', serif; color: white; font-size: 17px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+.nh-sub { color: rgba(255,255,255,0.35); font-size: 10px; letter-spacing: 1px; margin-bottom: 12px; }
+.nh-search { background: rgba(255,255,255,0.1); border-radius: 20px; padding: 7px 12px; display: flex; align-items: center; gap: 6px; font-size: 10px; color: rgba(255,255,255,0.4); }
+.news-body { background: var(--paper); height: calc(100% - 150px); overflow-y: auto; padding: 12px 14px 0; }
+.news-card { background: white; border-radius: 14px; padding: 12px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.04); }
+.news-card-top { display: flex; gap: 10px; margin-bottom: 8px; }
+.news-thumb { width: 72px; height: 56px; border-radius: 9px; background: var(--cream); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 24px; border: 1px solid var(--border); }
+.news-info { flex: 1; }
+.news-tag { background: #f5e8d0; color: var(--earth, #8B6914); font-size: 9px; padding: 2px 7px; border-radius: 7px; display: inline-block; margin-bottom: 4px; }
+.news-title { font-family: 'Noto Serif SC', serif; font-size: 12px; color: var(--ink); line-height: 1.5; font-weight: 600; }
+.news-meta { display: flex; justify-content: space-between; align-items: center; }
+.news-views { font-size: 9px; color: var(--muted); }
+.news-collect { font-size: 12px; }
+/* 资讯详情 */
+.news-detail-header { background: linear-gradient(160deg, #1a1208, #2e1e08); padding: 36px 16px 18px; position: relative; }
+.news-detail-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 18px; background: var(--warm); border-radius: 18px 18px 0 0; }
+.ndh-back { color: rgba(255,255,255,0.5); font-size: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 4px; }
+.ndh-tag { background: rgba(201,151,42,0.2); border: 1px solid rgba(201,151,42,0.3); color: var(--gold-light); font-size: 9px; padding: 2px 8px; border-radius: 8px; display: inline-block; margin-bottom: 8px; }
+.ndh-title { font-family: 'Noto Serif SC', serif; color: white; font-size: 15px; font-weight: 700; line-height: 1.5; margin-bottom: 8px; }
+.ndh-meta { color: rgba(255,255,255,0.35); font-size: 10px; display: flex; gap: 12px; }
+.news-detail-body { height: calc(100% - 175px); overflow-y: auto; background: var(--warm); padding: 16px 16px 0; }
+.ndb-section { margin-bottom: 14px; }
+.ndb-h { font-family: 'Noto Serif SC', serif; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.ndb-h::before { content: ''; display: inline-block; width: 3px; height: 13px; background: var(--gold); border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.ndb-p { font-size: 11px; color: #4a3a28; line-height: 1.85; }
+.ndb-quote { background: var(--cream); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 10px 12px; margin: 10px 0; font-size: 11px; color: var(--muted); font-style: italic; line-height: 1.7; }
+.news-detail-actions { position: absolute; bottom: 54px; left: 0; right: 0; background: white; border-top: 1px solid var(--border); padding: 10px 16px; display: flex; justify-content: space-around; align-items: center; }
+.nda-btn { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10px; color: var(--muted); }
+.nda-btn span { font-size: 16px; }
+.nda-btn.primary { color: var(--moss); }
+.contact-btn { background: linear-gradient(135deg, var(--moss-deep), var(--moss)); color: white; font-size: 11px; padding: 8px 18px; border-radius: 20px; font-weight: 500; letter-spacing: 1px; }
+
+/* ===== 5. 个人中心 ===== */
+.profile-header { background: linear-gradient(160deg, #1a2e18, #2d4a28); padding: 36px 16px 20px; position: relative; overflow: hidden; }
+.profile-header::before { content: '我'; position: absolute; right: -10px; top: -20px; font-family: 'Noto Serif SC', serif; font-size: 130px; color: rgba(255,255,255,0.03); font-weight: 700; }
+.profile-header::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 18px; background: var(--paper); border-radius: 18px 18px 0 0; }
+.ph-user { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.ph-avatar { width: 54px; height: 54px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif SC', serif; color: white; font-size: 22px; font-weight: 700; border: 2px solid rgba(255,255,255,0.15); flex-shrink: 0; }
+.ph-uname { font-family: 'Noto Serif SC', serif; color: white; font-size: 16px; font-weight: 600; margin-bottom: 3px; }
+.ph-phone { color: rgba(255,255,255,0.4); font-size: 10px; }
+.ph-edit { margin-left: auto; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); font-size: 9px; padding: 4px 10px; border-radius: 10px; flex-shrink: 0; }
+.ph-stats { display: flex; justify-content: space-around; background: rgba(255,255,255,0.06); border-radius: 12px; padding: 12px 0; }
+.ph-stat { text-align: center; }
+.ph-stat-num { font-family: 'Noto Serif SC', serif; color: white; font-size: 18px; font-weight: 700; }
+.ph-stat-label { color: rgba(255,255,255,0.35); font-size: 9px; margin-top: 2px; letter-spacing: 1px; }
+.profile-body { background: var(--paper); height: calc(100% - 192px); overflow-y: auto; padding: 12px 14px 0; }
+.menu-section { background: white; border-radius: 14px; margin-bottom: 10px; overflow: hidden; border: 1px solid rgba(0,0,0,0.04); }
+.menu-item { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--cream); }
+.menu-item:last-child { border-bottom: none; }
+.menu-icon { width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.mi-moss { background: #e4f0e0; }
+.mi-gold { background: #f5e8d0; }
+.mi-sage { background: #eef0e8; }
+.mi-red { background: #fce8e4; }
+.menu-label { font-size: 12px; color: var(--ink); font-weight: 500; flex: 1; }
+.menu-sub { font-size: 10px; color: var(--muted); margin-left: auto; margin-right: 4px; }
+.menu-arrow { font-size: 12px; color: #c0b090; }
+.menu-badge { background: #e04040; color: white; font-size: 9px; padding: 1px 6px; border-radius: 8px; margin-right: 4px; }
+
+/* ===== 6. 发布帖子 ===== */
+.publish-screen { background: var(--warm); }
+.publish-header { background: white; padding: 36px 16px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+.pub-back { font-size: 16px; color: var(--muted); }
+.pub-title { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 600; color: var(--ink); flex: 1; }
+.pub-submit { background: linear-gradient(135deg, var(--moss-deep), var(--moss)); color: white; font-size: 11px; padding: 6px 14px; border-radius: 16px; font-weight: 500; }
+.publish-body { padding: 14px; height: calc(100% - 92px); overflow-y: auto; }
+.pub-textarea { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 14px; min-height: 120px; font-size: 12px; color: var(--muted); line-height: 1.8; margin-bottom: 12px; }
+.pub-img-area { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.pub-img-box { width: 68px; height: 68px; border-radius: 10px; border: 1.5px dashed var(--border); display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--muted); }
+.pub-img-thumb { width: 68px; height: 68px; border-radius: 10px; background: var(--cream); display: flex; align-items: center; justify-content: center; font-size: 28px; border: 1px solid var(--border); position: relative; }
+.pub-del { position: absolute; top: -5px; right: -5px; width: 16px; height: 16px; background: #e04040; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; color: white; }
+.pub-options { background: white; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 12px; }
+.pub-option { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-bottom: 1px solid var(--cream); font-size: 12px; color: var(--muted); }
+.pub-option:last-child { border-bottom: none; }
+.pub-option-icon { font-size: 15px; }
+.pub-option-val { margin-left: auto; font-size: 11px; color: var(--moss); }
+
+/* ===== 7. 邀请好友 ===== */
+.invite-screen { background: linear-gradient(160deg, #1a2e18 0%, #2d4a28 40%, #1a1208 100%); }
+.invite-body { padding: 44px 22px 20px; display: flex; flex-direction: column; align-items: center; height: 100%; }
+.invite-badge { background: rgba(201,151,42,0.15); border: 1px solid rgba(201,151,42,0.3); color: var(--gold-light); font-size: 9px; padding: 3px 12px; border-radius: 10px; letter-spacing: 2px; margin-bottom: 16px; }
+.invite-title { font-family: 'Noto Serif SC', serif; color: white; font-size: 20px; font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; }
+.invite-desc { color: rgba(255,255,255,0.4); font-size: 11px; margin-bottom: 24px; text-align: center; line-height: 1.7; }
+.invite-qr { width: 140px; height: 140px; background: white; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; margin-bottom: 20px; padding: 12px; box-shadow: 0 10px 32px rgba(0,0,0,0.3); }
+.qr-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px; width: 80px; height: 80px; }
+.qr-cell { border-radius: 1px; }
+.qr-dark { background: #1a1208; }
+.qr-light { background: transparent; }
+.qr-label { font-size: 9px; color: var(--muted); letter-spacing: 1px; }
+.invite-code { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px 20px; text-align: center; margin-bottom: 20px; width: 100%; }
+.ic-label { color: rgba(255,255,255,0.3); font-size: 9px; letter-spacing: 2px; margin-bottom: 6px; }
+.ic-code { font-family: 'Noto Serif SC', serif; color: var(--gold-light); font-size: 22px; font-weight: 700; letter-spacing: 4px; }
+.invite-btns { display: flex; gap: 10px; width: 100%; }
+.inv-btn { flex: 1; border-radius: 12px; padding: 12px; text-align: center; font-size: 12px; font-weight: 500; }
+.inv-btn-wechat { background: #07c160; color: white; }
+.inv-btn-copy { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); }
+
+/* ===== 通用小工具 ===== */
+.tag-inline { display: inline-block; font-size: 9px; padding: 2px 7px; border-radius: 7px; }
+.ti-moss { background: #e4f0e0; color: var(--moss); }
+.ti-gold { background: #f5e8d0; color: #8B6914; }
+</style>
+</head>
+<body>
+
+<!-- 页头 -->
+<div class="page-header">
+  <div class="ph-eyebrow">中犇科技 · 定制开发</div>
+  <div class="ph-title">治未病健康资讯小程序</div>
+  <div class="ph-sub">1.0.1版本第一版 · 用户端效果图</div>
+  <div class="ph-badge">USER MINI-PROGRAM</div>
+</div>
+
+<!-- ===== 模块一：注册登录 ===== -->
+<div class="section-title">注册登录</div>
+<div class="phones-row">
+
+  <!-- 手机号登录 -->
+  <div class="phone-col">
+    <div class="phone-label">手机号登录</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="login-screen" style="height:100%;position:relative;">
+          <div class="login-bg-char">治</div>
+          <div class="login-top">
+            <div class="login-logo">☯</div>
+            <div class="login-name">治未病</div>
+            <div class="login-sub">懂生命 · 心身合一</div>
+          </div>
+          <div class="login-card" style="height:340px;">
+            <div class="login-tabs">
+              <div class="login-tab on">手机号登录</div>
+              <div class="login-tab">验证码登录</div>
+            </div>
+            <div class="inp-group">
+              <div class="inp-label">手机号码</div>
+              <div class="inp-box"><span class="inp-placeholder">请输入手机号</span></div>
+            </div>
+            <div class="inp-group">
+              <div class="inp-label">登录密码</div>
+              <div class="inp-box"><span class="inp-placeholder">请输入密码</span><span class="inp-action">忘记密码？</span></div>
+            </div>
+            <div class="login-btn">登 录</div>
+            <div class="login-divider"><div class="divider-line"></div><div class="divider-txt">或</div><div class="divider-line"></div></div>
+            <div class="wechat-btn">🟢 微信一键授权登录</div>
+            <div class="login-agreement">登录即代表同意 <span>《用户协议》</span> 及 <span>《隐私政策》</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 忘记密码 -->
+  <div class="phone-col">
+    <div class="phone-label">忘记密码</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="login-screen" style="height:100%;position:relative;">
+          <div class="login-bg-char">找</div>
+          <div class="login-top">
+            <div style="font-size:18px;color:rgba(255,255,255,0.5);margin-bottom:16px;">← 返回</div>
+            <div class="login-name" style="font-size:18px;">找回密码</div>
+            <div class="login-sub">验证手机号后重置密码</div>
+          </div>
+          <div class="login-card" style="height:320px;">
+            <div class="inp-group">
+              <div class="inp-label">手机号码</div>
+              <div class="inp-box"><span class="inp-placeholder">请输入注册手机号</span></div>
+            </div>
+            <div class="inp-group">
+              <div class="inp-label">验证码</div>
+              <div class="inp-box"><span class="inp-placeholder">请输入验证码</span><span class="inp-action">获取验证码</span></div>
+            </div>
+            <div class="inp-group">
+              <div class="inp-label">新密码</div>
+              <div class="inp-box"><span class="inp-placeholder">设置6-16位新密码</span></div>
+            </div>
+            <div class="inp-group">
+              <div class="inp-label">确认新密码</div>
+              <div class="inp-box"><span class="inp-placeholder">再次输入新密码</span></div>
+            </div>
+            <div class="login-btn" style="margin-top:4px;">确认重置</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 微信授权 -->
+  <div class="phone-col">
+    <div class="phone-label">微信授权登录</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="login-screen" style="height:100%;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;">
+          <div style="text-align:center;padding:0 30px;">
+            <div style="font-size:52px;margin-bottom:20px;">☯</div>
+            <div style="font-family:'Noto Serif SC',serif;color:white;font-size:20px;font-weight:700;letter-spacing:2px;margin-bottom:6px;">治未病</div>
+            <div style="color:rgba(255,255,255,0.35);font-size:11px;letter-spacing:2px;margin-bottom:36px;">懂生命 · 心身合一</div>
+            <div style="background:#07c160;border-radius:14px;padding:14px;color:white;font-size:13px;font-weight:600;margin-bottom:14px;letter-spacing:1px;">🟢 微信一键登录</div>
+            <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:12px;color:rgba(255,255,255,0.5);font-size:12px;margin-bottom:20px;">手机号验证码登录</div>
+            <div style="font-size:9px;color:rgba(255,255,255,0.25);line-height:1.8;">首次登录需绑定手机号<br>登录即同意 <span style="color:rgba(201,151,42,0.6);">《用户协议》《隐私政策》</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== 模块二：首页 ===== -->
+<div class="section-title">首页</div>
+<div class="phones-row">
+
+  <!-- 首页主页面 -->
+  <div class="phone-col">
+    <div class="phone-label">首页</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="home-header">
+          <div class="hh-top">
+            <div class="hh-loc">📍 上海市 <span style="color:rgba(255,255,255,0.4);font-size:10px;">▾</span></div>
+            <div class="hh-icons">
+              <div class="hh-notify" style="position:relative;">🔔<div class="hh-dot"></div></div>
+              <span>⚙️</span>
+            </div>
+          </div>
+          <div class="hh-search">🔍 搜索疾病、症状、养生知识…</div>
+          <div class="hh-banner">
+            <div class="hh-banner-icon">☯</div>
+            <div class="hh-banner-text"><strong>今日养生 · 立春</strong>春季养肝护阳，早睡早起，情绪舒畅</div>
+          </div>
+        </div>
+        <div class="home-body">
+          <!-- 轮播图 -->
+          <div class="home-carousel">
+            <div class="carousel-content">
+              <div class="carousel-tag">平台公告</div>
+              <div class="carousel-title">王医生新专题上线：肺结节的真相</div>
+              <div class="carousel-dots"><div class="cdot on"></div><div class="cdot"></div><div class="cdot"></div></div>
+            </div>
+          </div>
+          <!-- 公告栏 -->
+          <div class="home-section" style="padding-top:12px;">
+            <div class="notice-bar">
+              <div class="notice-icon">📢</div>
+              <div class="notice-text">平台公告：本周新增"心血管"专题分类，欢迎关注</div>
+            </div>
+          </div>
+          <!-- 论坛精选 -->
+          <div class="home-section">
+            <div class="hs-title">论坛精选 <span class="hs-more">更多 ›</span></div>
+            <div class="post-card">
+              <div class="post-head">
+                <div class="post-avatar pa-g">王</div>
+                <div><div class="post-uname">王誉瑾医生</div><div class="post-meta">2小时前 · 慢性病</div></div>
+                <div class="post-tag">认证医生</div>
+              </div>
+              <div class="post-content">高血压患者不能只看数字，情绪才是根本。很多人压力一大血压就飙升，药量越来越多…</div>
+              <div class="post-actions">
+                <div class="post-act red">❤️ 128</div>
+                <div class="post-act">💬 34</div>
+                <div class="post-act">📤 分享</div>
+              </div>
+            </div>
+          </div>
+          <!-- 资讯推荐 -->
+          <div class="home-section">
+            <div class="hs-title">热门资讯 <span class="hs-more">更多 ›</span></div>
+            <div class="news-card">
+              <div class="news-card-top">
+                <div class="news-thumb">🫁</div>
+                <div class="news-info">
+                  <div class="news-tag">肺结节</div>
+                  <div class="news-title">发现肺结节先别慌，医生教你判断良恶性</div>
+                </div>
+              </div>
+              <div class="news-meta"><div class="news-views">👁 3,201次浏览</div><div class="news-collect">🔖</div></div>
+            </div>
+          </div>
+          <div style="height:60px;"></div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-txt on">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-txt">论坛</div></div>
+          <div class="nav-item"><div class="nav-icon">📰</div><div class="nav-txt">资讯</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-txt">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 系统通知 -->
+  <div class="phone-col">
+    <div class="phone-label">系统通知</div>
+    <div class="phone">
+      <div class="screen">
+        <div style="background:linear-gradient(160deg,#1a2e18,#2d4a28);padding:36px 16px 16px;position:relative;">
+          <div style="color:rgba(255,255,255,0.5);font-size:12px;margin-bottom:10px;">← 返回</div>
+          <div style="font-family:'Noto Serif SC',serif;color:white;font-size:17px;font-weight:700;">消息中心</div>
+          <div style="position:absolute;bottom:-1px;left:0;right:0;height:16px;background:var(--cream);border-radius:16px 16px 0 0;"></div>
+        </div>
+        <div style="background:var(--cream);height:calc(100% - 108px);overflow-y:auto;padding:12px 14px 0;">
+          <!-- 系统公告 -->
+          <div style="font-size:11px;color:var(--muted);letter-spacing:1px;margin-bottom:8px;">系统公告</div>
+          <div style="background:white;border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid rgba(0,0,0,0.04);">
+            <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;">
+              <div style="width:30px;height:30px;background:linear-gradient(135deg,#2d4a28,#4a7040);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">📢</div>
+              <div style="flex:1;"><div style="font-size:11px;font-weight:600;color:var(--ink);margin-bottom:2px;">平台公告</div><div style="font-size:10px;color:var(--muted);">今天 09:30</div></div>
+            </div>
+            <div style="font-size:11px;color:#3a2e1e;line-height:1.7;margin-left:38px;">🌿 本周新增心血管专题，王医生将于周五发布专题首篇，敬请期待！</div>
+          </div>
+          <div style="background:white;border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid rgba(0,0,0,0.04);">
+            <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;">
+              <div style="width:30px;height:30px;background:linear-gradient(135deg,#8B6914,#c9972a);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">🎉</div>
+              <div style="flex:1;"><div style="font-size:11px;font-weight:600;color:var(--ink);margin-bottom:2px;">活动通知</div><div style="font-size:10px;color:var(--muted);">昨天 18:00</div></div>
+            </div>
+            <div style="font-size:11px;color:#3a2e1e;line-height:1.7;margin-left:38px;">平台上线一周年，邀请好友可获得优先体验资格，快来参与！</div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);letter-spacing:1px;margin-bottom:8px;margin-top:4px;">互动通知</div>
+          <div style="background:white;border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid rgba(0,0,0,0.04);">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+              <div class="post-avatar pa-g" style="width:28px;height:28px;font-size:11px;">李</div>
+              <div style="font-size:11px;color:var(--ink);">李阿姨 赞了你的帖子</div>
+              <div style="margin-left:auto;font-size:9px;color:var(--muted);">3小时前</div>
+            </div>
+            <div style="font-size:10px;color:var(--muted);margin-left:36px;line-height:1.6;">"我也有同样的困惑，感谢分享！"</div>
+          </div>
+          <div style="background:white;border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid rgba(0,0,0,0.04);">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+              <div class="post-avatar pa-b" style="width:28px;height:28px;font-size:11px;">陈</div>
+              <div style="font-size:11px;color:var(--ink);">陈医生 回复了你的评论</div>
+              <div style="margin-left:auto;font-size:9px;color:var(--muted);">昨天</div>
+            </div>
+            <div style="font-size:10px;color:var(--muted);margin-left:36px;line-height:1.6;">"您提的问题很好，颈源性头痛确实常被误诊…"</div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-txt">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-txt">论坛</div></div>
+          <div class="nav-item"><div class="nav-icon">📰</div><div class="nav-txt">资讯</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-txt">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== 模块三：论坛 ===== -->
+<div class="section-title">论坛</div>
+<div class="phones-row">
+
+  <!-- 论坛列表 -->
+  <div class="phone-col">
+    <div class="phone-label">论坛列表</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="forum-header">
+          <div class="fh-title">健康社区</div>
+          <div class="fh-tabs">
+            <div class="fh-tab on">推荐</div>
+            <div class="fh-tab off">附近</div>
+            <div class="fh-tab off">慢性病</div>
+            <div class="fh-tab off">心血管</div>
+            <div class="fh-tab off">育儿</div>
+          </div>
+        </div>
+        <div class="forum-body">
+          <div class="post-card">
+            <div class="post-head">
+              <div class="post-avatar pa-g">王</div>
+              <div><div class="post-uname">王誉瑾医生</div><div class="post-meta">3小时前 · 慢性病</div></div>
+              <div class="post-tag">认证医生</div>
+            </div>
+            <div class="post-content">高血压光靠降压药是不够的。我治病更适合讲病，让你心里放松了，你才真的好了…</div>
+            <div class="post-img-row">
+              <div class="post-img">❤️</div>
+              <div class="post-img">🩺</div>
+            </div>
+            <div class="post-loc">📍 上海市</div>
+            <div class="post-actions">
+              <div class="post-act red">❤️ 201</div><div class="post-act">💬 58</div><div class="post-act">🔄 转发</div><div class="post-act">📤</div>
+            </div>
+          </div>
+          <div class="post-card">
+            <div class="post-head">
+              <div class="post-avatar pa-b">李</div>
+              <div><div class="post-uname">李阿姨的康复日记</div><div class="post-meta">昨天 · 生命成长</div></div>
+            </div>
+            <div class="post-content">在这里学了三个月，终于明白我妈的糖尿病为什么越来越严重了，饮食只是一方面，睡眠才是根本…</div>
+            <div class="post-actions">
+              <div class="post-act">❤️ 64</div><div class="post-act">💬 18</div><div class="post-act">🔄 转发</div><div class="post-act">📤</div>
+            </div>
+          </div>
+          <div class="post-card">
+            <div class="post-head">
+              <div class="post-avatar pa-r">陈</div>
+              <div><div class="post-uname">陈医生</div><div class="post-meta">2天前 · 育儿健康</div></div>
+              <div class="post-tag">认证医生</div>
+            </div>
+            <div class="post-content">秋冬换季孩子咳嗽先别急着喂消炎药，寒咳和热咳调理方法完全不同，先判断再处理…</div>
+            <div class="post-actions">
+              <div class="post-act">❤️ 312</div><div class="post-act">💬 74</div><div class="post-act">🔄 转发</div><div class="post-act">📤</div>
+            </div>
+          </div>
+        </div>
+        <div class="fab-btn">✏️</div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-txt">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-txt on">论坛</div></div>
+          <div class="nav-item"><div class="nav-icon">📰</div><div class="nav-txt">资讯</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-txt">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 帖子详情 -->
+  <div class="phone-col">
+    <div class="phone-label">帖子详情</div>
+    <div class="phone">
+      <div class="screen">
+        <div style="background:linear-gradient(160deg,#1a2e18,#2d4a28);padding:36px 16px 16px;position:relative;">
+          <div style="color:rgba(255,255,255,0.5);font-size:12px;margin-bottom:10px;">← 返回</div>
+          <div style="position:absolute;bottom:-1px;left:0;right:0;height:16px;background:var(--warm);border-radius:16px 16px 0 0;"></div>
+        </div>
+        <div style="background:var(--warm);height:calc(100% - 120px);overflow-y:auto;padding:14px;">
+          <div class="post-head" style="margin-bottom:12px;">
+            <div class="post-avatar pa-g">王</div>
+            <div><div class="post-uname">王誉瑾医生</div><div class="post-meta">3小时前 · 上海市</div></div>
+            <div class="post-tag">认证医生</div>
+          </div>
+          <div style="font-size:12px;color:#3a2e1e;line-height:1.85;margin-bottom:14px;">高血压患者，光靠降压药是不够的。<br><br>我见过太多人，压力一大血压就飙升，药量越来越多，但根本问题没有解决。情绪与血压的关系，现代医学也在逐步认可。<br><br>从中医来看，肝气郁结、气血不畅都是高血压的根源。建议大家先从调整情绪和作息入手…</div>
+          <div class="post-img-row">
+            <div class="post-img" style="width:100%;height:80px;border-radius:10px;">❤️ 🩺</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--cream);border-bottom:1px solid var(--cream);margin:10px 0;">
+            <div style="font-size:10px;color:var(--muted);">👁 3,201次浏览 · 收藏128 · 转发56</div>
+            <div style="display:flex;gap:8px;"><span style="font-size:11px;color:var(--muted);">举报</span><span style="font-size:11px;color:var(--muted);">拉黑</span></div>
+          </div>
+          <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:10px;">评论 <span style="color:var(--muted);font-weight:400;">34条</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:12px;">
+            <div class="post-avatar pa-b" style="width:28px;height:28px;font-size:11px;">李</div>
+            <div style="flex:1;background:var(--cream);border-radius:10px;padding:8px 10px;">
+              <div style="font-size:10px;font-weight:600;color:var(--ink);margin-bottom:3px;">李阿姨 <span style="color:var(--muted);font-weight:400;">· 2小时前</span></div>
+              <div style="font-size:11px;color:#3a2e1e;line-height:1.6;">太有共鸣了，我妈就是这样，越焦虑血压越高</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:12px;">
+            <div class="post-avatar pa-t" style="width:28px;height:28px;font-size:11px;">张</div>
+            <div style="flex:1;background:var(--cream);border-radius:10px;padding:8px 10px;">
+              <div style="font-size:10px;font-weight:600;color:var(--ink);margin-bottom:3px;">张先生 <span style="color:var(--muted);font-weight:400;">· 5小时前</span></div>
+              <div style="font-size:11px;color:#3a2e1e;line-height:1.6;">请问医生，葛根汤对颈源性高血压有效吗？</div>
+            </div>
+          </div>
+        </div>
+        <div style="position:absolute;bottom:54px;left:0;right:0;background:white;border-top:1px solid var(--border);padding:8px 14px;display:flex;gap:10px;align-items:center;">
+          <div style="flex:1;background:var(--cream);border-radius:18px;padding:8px 14px;font-size:11px;color:var(--muted);">说说你的想法…</div>
+          <div style="font-size:18px;">❤️</div>
+          <div style="background:linear-gradient(135deg,var(--moss-deep),var(--moss));color:white;font-size:11px;padding:7px 14px;border-radius:16px;">发送</div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-txt">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-txt on">论坛</div></div>
+          <div class="nav-item"><div class="nav-icon">📰</div><div class="nav-txt">资讯</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-txt">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 发布帖子 -->
+  <div class="phone-col">
+    <div class="phone-label">发布帖子</div>
+    <div class="phone">
+      <div class="screen publish-screen">
+        <div class="publish-header">
+          <div class="pub-back">←</div>
+          <div class="pub-title">发布帖子</div>
+          <div class="pub-submit">发布</div>
+        </div>
+        <div class="publish-body">
+          <div class="pub-textarea">分享你的健康经验或疑问，让更多人看见…</div>
+          <div class="pub-img-area">
+            <div class="pub-img-thumb">🌿<div class="pub-del">×</div></div>
+            <div class="pub-img-thumb">❤️<div class="pub-del">×</div></div>
+            <div class="pub-img-box">＋</div>
+          </div>
+          <div class="pub-options">
+            <div class="pub-option"><div class="pub-option-icon">🏷</div>选择分类<div class="pub-option-val">慢性病 ›</div></div>
+            <div class="pub-option"><div class="pub-option-icon">📍</div>添加地址<div class="pub-option-val">上海市 ›</div></div>
+            <div class="pub-option"><div class="pub-option-icon">🎬</div>发布视频（限60秒）</div>
+          </div>
+          <div style="font-size:10px;color:var(--muted);text-align:center;line-height:1.8;">图片与视频二选一，不可同时发布<br>请遵守社区规范，友善交流</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 用户主页 -->
+  <div class="phone-col">
+    <div class="phone-label">用户主页</div>
+    <div class="phone">
+      <div class="screen">
+        <div style="background:linear-gradient(160deg,#1a2e18,#2d4a28);padding:36px 16px 20px;position:relative;overflow:hidden;">
+          <div style="position:absolute;right:-10px;top:-20px;font-family:'Noto Serif SC',serif;font-size:120px;color:rgba(255,255,255,0.03);font-weight:700;">人</div>
+          <div style="color:rgba(255,255,255,0.5);font-size:12px;margin-bottom:14px;">← 返回</div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+            <div class="post-avatar pa-g" style="width:52px;height:52px;font-size:20px;border:2px solid rgba(255,255,255,0.15);">王</div>
+            <div><div style="font-family:'Noto Serif SC',serif;color:white;font-size:15px;font-weight:600;margin-bottom:2px;">王誉瑾医生</div><div style="color:rgba(255,255,255,0.4);font-size:10px;margin-bottom:6px;">中西医结合 · 科研管理</div><div style="background:rgba(201,151,42,0.2);border:1px solid rgba(201,151,42,0.3);color:var(--gold-light);font-size:9px;padding:2px 8px;border-radius:8px;display:inline-block;">认证医生</div></div>
+            <div style="margin-left:auto;background:linear-gradient(135deg,var(--moss-deep),var(--moss));color:white;font-size:10px;padding:6px 12px;border-radius:10px;">关注</div>
+          </div>
+          <div style="display:flex;justify-content:space-around;background:rgba(255,255,255,0.06);border-radius:10px;padding:10px 0;">
+            <div style="text-align:center;"><div style="font-family:'Noto Serif SC',serif;color:white;font-size:17px;font-weight:700;">248</div><div style="color:rgba(255,255,255,0.35);font-size:9px;margin-top:1px;">关注</div></div>
+            <div style="text-align:center;"><div style="font-family:'Noto Serif SC',serif;color:white;font-size:17px;font-weight:700;">8,420</div><div style="color:rgba(255,255,255,0.35);font-size:9px;margin-top:1px;">粉丝</div></div>
+            <div style="text-align:center;"><div style="font-family:'Noto Serif SC',serif;color:white;font-size:17px;font-weight:700;">312</div><div style="color:rgba(255,255,255,0.35);font-size:9px;margin-top:1px;">发布</div></div>
+          </div>
+          <div style="position:absolute;bottom:-1px;left:0;right:0;height:16px;background:var(--warm);border-radius:16px 16px 0 0;"></div>
+        </div>
+        <div style="height:calc(100% - 210px);overflow-y:auto;background:var(--warm);padding:12px 14px 0;">
+          <div class="post-card">
+            <div style="font-size:9px;color:var(--muted);margin-bottom:6px;">最近发布</div>
+            <div class="post-content">高血压患者，光靠降压药是不够的。情绪才是根本…</div>
+            <div class="post-actions"><div class="post-act red">❤️ 201</div><div class="post-act">💬 58</div></div>
+          </div>
+          <div class="post-card">
+            <div class="post-content">秋冬换季，孩子咳嗽先别急着喂消炎药，寒咳热咳分开看…</div>
+            <div class="post-actions"><div class="post-act">❤️ 312</div><div class="post-act">💬 74</div></div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-txt">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-txt on">论坛</div></div>
+          <div class="nav-item"><div class="nav-icon">📰</div><div class="nav-txt">资讯</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-txt">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== 模块四：资讯 ===== -->
+<div class="section-title">资讯</div>
+<div class="phones-row">
+
+  <!-- 资讯列表 -->
+  <div class="phone-col">
+    <div class="phone-label">资讯列表</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="news-header">
+          <div class="nh-title">健康资讯</div>
+          <div class="nh-sub">中西医结合 · 权威科普</div>
+          <div class="nh-search">🔍 搜索疾病、症状、养生知识…</div>
+        </div>
+        <div class="news-body">
+          <!-- 轮播资讯 -->
+          <div style="background:linear-gradient(135deg,#1a2e18,#3d6035);border-radius:12px;padding:14px;margin-bottom:12px;position:relative;overflow:hidden;">
+            <div style="position:absolute;right:-8px;top:-8px;font-size:60px;opacity:0.06;">🫁</div>
+            <div style="font-size:9px;background:rgba(201,151,42,0.2);border:1px solid rgba(201,151,42,0.3);color:var(--gold-light);padding:2px 8px;border-radius:8px;display:inline-block;margin-bottom:7px;">专题推荐</div>
+            <div style="font-family:'Noto Serif SC',serif;color:white;font-size:13px;font-weight:600;margin-bottom:4px;">肺结节的真相：发现了要不要手术？</div>
+            <div style="color:rgba(255,255,255,0.4);font-size:10px;">王誉瑾医生 · 3,201次浏览</div>
+          </div>
+          <div class="news-card">
+            <div class="news-card-top">
+              <div class="news-thumb">🫁</div>
+              <div class="news-info"><div class="news-tag">肺结节</div><div class="news-title">发现肺结节先别慌，医生教你判断良恶性</div></div>
+            </div>
+            <div class="news-meta"><div class="news-views">👁 3,201 · 王誉瑾医生</div><div class="news-collect">🔖</div></div>
+          </div>
+          <div class="news-card">
+            <div class="news-card-top">
+              <div class="news-thumb">❤️</div>
+              <div class="news-info"><div class="news-tag">心血管</div><div class="news-title">高血压不只是数字问题，情绪才是根本</div></div>
+            </div>
+            <div class="news-meta"><div class="news-views">👁 2,408 · 王誉瑾医生</div><div class="news-collect">🔖</div></div>
+          </div>
+          <div class="news-card">
+            <div class="news-card-top">
+              <div class="news-thumb">🌿</div>
+              <div class="news-info"><div class="news-tag">中医之道</div><div class="news-title">秋冬换季，这样养肺效果最好</div></div>
+            </div>
+            <div class="news-meta"><div class="news-views">👁 1,890 · 陈医生</div><div class="news-collect">🔖</div></div>
+          </div>
+          <div class="news-card">
+            <div class="news-card-top">
+              <div class="news-thumb">👶</div>
+              <div class="news-info"><div class="news-tag">育儿健康</div><div class="news-title">小孩咳嗽寒咳热咳怎么分辨？</div></div>
+            </div>
+            <div class="news-meta"><div class="news-views">👁 1,560 · 陈医生</div><div class="news-collect">🔖</div></div>
+          </div>
+          <div style="height:60px;"></div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-txt">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-txt">论坛</div></div>
+          <div class="nav-item"><div class="nav-icon">📰</div><div class="nav-txt on">资讯</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-txt">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 资讯详情 -->
+  <div class="phone-col">
+    <div class="phone-label">资讯详情</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="news-detail-header">
+          <div class="ndh-back">← 返回资讯</div>
+          <div class="ndh-tag">肺结节</div>
+          <div class="ndh-title">发现肺结节先别慌，医生教你判断良恶性</div>
+          <div class="ndh-meta"><span>👁 3,201浏览</span><span>王誉瑾医生</span><span>2025-03-10</span></div>
+        </div>
+        <div class="news-detail-body">
+          <div class="ndb-section">
+            <div class="ndb-p">体检发现肺结节，许多人第一反应是恐慌——"是癌症吗？要不要手术？"其实大多数肺结节是良性的，需要冷静判断。</div>
+          </div>
+          <div class="ndb-quote">不知死，何以生。了解疾病，才能真正放下恐惧。——王誉瑾</div>
+          <div class="ndb-section">
+            <div class="ndb-h">如何判断结节性质？</div>
+            <div class="ndb-p">首先看大小：5毫米以下密切观察即可；5-10毫米需3-6个月复查；10毫米以上建议进一步检查。其次看形态：边界清晰、密度均匀的多为良性；边界不规则、有毛刺的需警惕。</div>
+          </div>
+          <div class="ndb-section">
+            <div class="ndb-h">中医怎么看待肺结节？</div>
+            <div class="ndb-p">从中医角度，肺结节与"痰瘀互结"有关，与情志不畅、饮食失调密切相关。调理上建议疏肝理气、化痰散结…</div>
+          </div>
+          <div style="height:80px;"></div>
+        </div>
+        <div class="news-detail-actions">
+          <div class="nda-btn"><span>🔖</span>收藏</div>
+          <div class="nda-btn"><span>👍</span>点赞</div>
+          <div class="nda-btn"><span>💬</span>评论</div>
+          <div class="contact-btn">联系平台</div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-txt">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-txt">论坛</div></div>
+          <div class="nav-item"><div class="nav-icon">📰</div><div class="nav-txt on">资讯</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-txt">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== 模块五：个人中心 ===== -->
+<div class="section-title">个人中心</div>
+<div class="phones-row">
+
+  <!-- 个人中心主页 -->
+  <div class="phone-col">
+    <div class="phone-label">个人中心</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="profile-header">
+          <div class="ph-user">
+            <div class="ph-avatar">张</div>
+            <div><div class="ph-uname">张先生</div><div class="ph-phone">138****8888</div></div>
+            <div class="ph-edit">编辑资料</div>
+          </div>
+          <div class="ph-stats">
+            <div class="ph-stat"><div class="ph-stat-num">12</div><div class="ph-stat-label">关注</div></div>
+            <div class="ph-stat"><div class="ph-stat-num">38</div><div class="ph-stat-label">粉丝</div></div>
+            <div class="ph-stat"><div class="ph-stat-num">64</div><div class="ph-stat-label">收藏</div></div>
+            <div class="ph-stat"><div class="ph-stat-num">201</div><div class="ph-stat-label">点赞</div></div>
+          </div>
+        </div>
+        <div class="profile-body">
+          <div class="menu-section">
+            <div class="menu-item"><div class="menu-icon mi-moss">📖</div><div class="menu-label">我的收藏</div><div class="menu-sub">64篇</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-gold">👁</div><div class="menu-label">浏览足迹</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-sage">📝</div><div class="menu-label">我的发布</div><div class="menu-sub">8篇</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-moss">💬</div><div class="menu-label">我的评论</div><div class="menu-arrow">›</div></div>
+          </div>
+          <div class="menu-section">
+            <div class="menu-item"><div class="menu-icon mi-gold">🔔</div><div class="menu-label">我的消息</div><div class="menu-badge">3</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-moss">🎁</div><div class="menu-label">邀请好友</div><div class="menu-arrow">›</div></div>
+          </div>
+          <div class="menu-section">
+            <div class="menu-item"><div class="menu-icon mi-sage">🔒</div><div class="menu-label">修改密码</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-sage">📱</div><div class="menu-label">更换手机号</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-gold">🧹</div><div class="menu-label">清除缓存</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-sage">📞</div><div class="menu-label">联系我们</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-sage">ℹ️</div><div class="menu-label">关于我们</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-sage">💡</div><div class="menu-label">意见反馈</div><div class="menu-arrow">›</div></div>
+          </div>
+          <div style="margin:8px 0;background:white;border-radius:12px;border:1px solid rgba(0,0,0,0.04);">
+            <div class="menu-item" style="border-bottom:none;"><div class="menu-icon mi-red">🚪</div><div class="menu-label" style="color:#c84a30;">退出登录</div></div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-txt">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-txt">论坛</div></div>
+          <div class="nav-item"><div class="nav-icon">📰</div><div class="nav-txt">资讯</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-txt on">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 我的收藏 -->
+  <div class="phone-col">
+    <div class="phone-label">我的收藏</div>
+    <div class="phone">
+      <div class="screen">
+        <div style="background:linear-gradient(160deg,#1a1208,#2e1e08);padding:36px 16px 16px;position:relative;">
+          <div style="color:rgba(255,255,255,0.5);font-size:12px;margin-bottom:10px;">← 返回</div>
+          <div style="font-family:'Noto Serif SC',serif;color:white;font-size:17px;font-weight:700;margin-bottom:2px;">我的收藏</div>
+          <div style="color:rgba(255,255,255,0.35);font-size:10px;">共64篇</div>
+          <div style="position:absolute;bottom:-1px;left:0;right:0;height:16px;background:var(--paper);border-radius:16px 16px 0 0;"></div>
+        </div>
+        <div style="background:var(--paper);height:calc(100% - 110px);overflow-y:auto;padding:12px 14px 0;">
+          <div class="news-card">
+            <div class="news-card-top">
+              <div class="news-thumb">🫁</div>
+              <div class="news-info"><div class="news-tag">肺结节</div><div class="news-title">发现肺结节先别慌，医生教你判断良恶性</div></div>
+            </div>
+            <div class="news-meta"><div class="news-views">收藏于 2025-03-10</div><div style="font-size:14px;color:#c84a30;">♥</div></div>
+          </div>
+          <div class="news-card">
+            <div class="news-card-top">
+              <div class="news-thumb">❤️</div>
+              <div class="news-info"><div class="news-tag">心血管</div><div class="news-title">高血压不只是数字问题，情绪才是根本</div></div>
+            </div>
+            <div class="news-meta"><div class="news-views">收藏于 2025-03-08</div><div style="font-size:14px;color:#c84a30;">♥</div></div>
+          </div>
+          <div class="news-card">
+            <div class="news-card-top">
+              <div class="news-thumb">🌿</div>
+              <div class="news-info"><div class="news-tag">中医之道</div><div class="news-title">秋冬换季，这样养肺效果最好</div></div>
+            </div>
+            <div class="news-meta"><div class="news-views">收藏于 2025-03-06</div><div style="font-size:14px;color:#c84a30;">♥</div></div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-txt">首页</div></div>
+          <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-txt">论坛</div></div>
+          <div class="nav-item"><div class="nav-icon">📰</div><div class="nav-txt">资讯</div></div>
+          <div class="nav-item"><div class="nav-icon">👤</div><div class="nav-txt on">我的</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 邀请好友 -->
+  <div class="phone-col">
+    <div class="phone-label">邀请好友</div>
+    <div class="phone">
+      <div class="screen">
+        <div class="invite-screen">
+          <div class="invite-body">
+            <div style="color:rgba(255,255,255,0.4);font-size:12px;align-self:flex-start;margin-bottom:16px;">← 返回</div>
+            <div class="invite-badge">INVITE FRIENDS</div>
+            <div class="invite-title">邀请好友</div>
+            <div class="invite-desc">邀请好友一起加入治未病平台<br>共同探索健康生命之道</div>
+            <div class="invite-qr">
+              <div style="display:grid;grid-template-columns:repeat(10,1fr);gap:2px;width:88px;height:88px;">
+                <!-- 简化QR码视觉 -->
+                <div style="grid-column:1/4;grid-row:1/4;background:#1a1208;border-radius:2px;"></div>
+                <div style="grid-column:2/3;grid-row:2/3;background:white;border-radius:1px;"></div>
+                <div style="grid-column:5/6;grid-row:1/2;background:#1a1208;border-radius:1px;"></div>
+                <div style="grid-column:7/8;grid-row:1/2;background:#1a1208;border-radius:1px;"></div>
+                <div style="grid-column:8/11;grid-row:1/4;background:#1a1208;border-radius:2px;"></div>
+                <div style="grid-column:9/10;grid-row:2/3;background:white;border-radius:1px;"></div>
+                <div style="grid-column:4/7;grid-row:4/6;background:#1a1208;border-radius:1px;"></div>
+                <div style="grid-column:1/4;grid-row:8/11;background:#1a1208;border-radius:2px;"></div>
+                <div style="grid-column:2/3;grid-row:9/10;background:white;border-radius:1px;"></div>
+                <div style="grid-column:5/8;grid-row:7/9;background:#1a1208;border-radius:1px;"></div>
+                <div style="grid-column:8/11;grid-row:6/9;background:#1a1208;border-radius:1px;"></div>
+                <div style="grid-column:4/5;grid-row:9/11;background:#1a1208;border-radius:1px;"></div>
+                <div style="grid-column:6/9;grid-row:10/11;background:#1a1208;border-radius:1px;"></div>
+              </div>
+              <div style="font-size:9px;color:var(--muted);letter-spacing:1px;">扫码加入</div>
+            </div>
+            <div class="invite-code">
+              <div class="ic-label">邀请码</div>
+              <div class="ic-code">WYJ888</div>
+            </div>
+            <div class="invite-btns">
+              <div class="inv-btn inv-btn-wechat">🟢 分享给好友</div>
+              <div class="inv-btn inv-btn-copy">📋 复制链接</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 系统设置 -->
+  <div class="phone-col">
+    <div class="phone-label">系统设置</div>
+    <div class="phone">
+      <div class="screen" style="background:var(--paper);">
+        <div style="background:linear-gradient(160deg,#1a2e18,#2d4a28);padding:36px 16px 16px;position:relative;">
+          <div style="color:rgba(255,255,255,0.5);font-size:12px;margin-bottom:10px;">← 返回</div>
+          <div style="font-family:'Noto Serif SC',serif;color:white;font-size:17px;font-weight:700;">系统设置</div>
+          <div style="position:absolute;bottom:-1px;left:0;right:0;height:16px;background:var(--paper);border-radius:16px 16px 0 0;"></div>
+        </div>
+        <div style="padding:12px 14px 0;overflow-y:auto;height:calc(100% - 105px);">
+          <div class="menu-section">
+            <div class="menu-item"><div class="menu-icon mi-sage">🔒</div><div class="menu-label">修改登录密码</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-sage">📱</div><div class="menu-label">更换手机号</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-gold">💰</div><div class="menu-label">修改支付密码</div><div class="menu-arrow">›</div></div>
+          </div>
+          <!-- 修改密码展开示意 -->
+          <div style="background:white;border-radius:12px;padding:14px;margin-bottom:10px;border:1px solid rgba(201,151,42,0.15);">
+            <div style="font-size:11px;font-weight:600;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:6px;"><span style="width:3px;height:12px;background:var(--gold);border-radius:2px;display:inline-block;"></span>修改登录密码</div>
+            <div class="inp-group"><div class="inp-label">旧密码验证</div><div class="inp-box"><span class="inp-placeholder">请输入当前密码</span></div></div>
+            <div class="inp-group"><div class="inp-label">手机验证码</div><div class="inp-box"><span class="inp-placeholder">请输入验证码</span><span class="inp-action">获取</span></div></div>
+            <div class="inp-group"><div class="inp-label">设置新密码</div><div class="inp-box"><span class="inp-placeholder">6-16位新密码</span></div></div>
+            <div class="login-btn" style="margin-top:8px;margin-bottom:0;">确认修改</div>
+          </div>
+          <div class="menu-section">
+            <div class="menu-item"><div class="menu-icon mi-sage">🧹</div><div class="menu-label">清除缓存</div><div class="menu-sub">12.3MB</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-gold">🔔</div><div class="menu-label">消息推送通知</div><div style="margin-left:auto;width:36px;height:20px;background:var(--moss);border-radius:10px;position:relative;"><div style="width:16px;height:16px;background:white;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div></div>
+          </div>
+          <div class="menu-section">
+            <div class="menu-item"><div class="menu-icon mi-sage">📄</div><div class="menu-label">用户协议</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-sage">🔐</div><div class="menu-label">隐私政策</div><div class="menu-arrow">›</div></div>
+            <div class="menu-item"><div class="menu-icon mi-sage">ℹ️</div><div class="menu-label">关于我们</div><div class="menu-sub">v1.0.1</div><div class="menu-arrow">›</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 版权 -->
+<div style="margin-top:60px;text-align:center;">
+  <div style="width:40px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);margin:0 auto 16px;"></div>
+  <div style="color:rgba(255,255,255,0.2);font-size:11px;letter-spacing:2px;line-height:2;">治未病健康资讯小程序 · 1.0.1版本第一版 · 用户端效果图</div>
+  <div style="color:rgba(201,151,42,0.4);font-size:11px;letter-spacing:1px;margin-top:4px;">中犇科技 · 上海商务部 安朝</div>
+</div>
+
+</body>
+</html>
